@@ -1,0 +1,121 @@
+/* Empty. Add your own CSS if you like */
+.wrapper {
+  /*margin: auto;*/
+  height:200px;
+  width:200px;
+  /*width: 100%;*/
+  background:no-repeat center center;
+  background-size: contain;
+}
+#login-image{
+  background:url(/img/login-bg.jpg) no-repeat center center fixed;
+  background-size:cover;
+  /*opacity:0.1;*/
+}
+
+.logo-box{
+  display: inline-block;
+  margin-left:auto;
+  margin-right:auto;
+  border: 3px solid white;
+}
+
+.red{
+  color:red;
+}
+
+.background-light-green{
+  background-color:lightgreen;
+}
+
+.background-light-blue{
+  background-color: lightblue;
+}
+
+.button-small{
+  line-height:21px;
+}
+.popover {
+  overflow: scroll;
+  position: absolute;
+  top: 0;
+  width: 90% !important;
+  height: 90% !important;
+}
+
+.center-image{
+  display: block;
+  margin:auto;
+}
+
+.no-side-margin{
+  margin-left: 0;
+  margin-right:0;
+}
+
+.even-list{
+  background-color:#fafafa;
+}
+
+.even-list input{
+  background:transparent;
+}
+
+.button.button-block{
+  margin:0 !important;
+}
+
+.bar{
+  padding:0 !important;
+}
+
+.button-fixed-bottom{
+  position:fixed;
+  bottom: 0px;
+}
+
+.fab-fixed-right{
+  position:absolute;
+  bottom: 10%;
+  right:10%;
+}
+
+.type-column{
+  width:90px;
+}
+
+.no-padding-top-bottom{
+  padding-top:0;
+  padding-bottom:0;
+}
+
+.no-padding{
+  padding:0
+}
+
+.small-object-icon{
+  font-size:50px;
+}
+
+.large-object-icon{
+  font-size:150px;
+}
+
+.bottom-blur-white{
+  background-color: white;
+  width: 100%;
+  opacity: 0.5;
+}
+
+.icon-blur{
+  color:white;opacity: 0.3;
+}
+
+.padding-left{
+  padding-left:10px;
+}
+
+.object-list{
+  min-height:100px;
+}
+

@@ -1,0 +1,45 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.ionicframework.todo341466"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.ionicframework.todo341466"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.ionicframework.todo341466"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.ionicframework.todo341466"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.ionicframework.todo341466"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.ionicframework.todo341466"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.ionicframework.todo341466"
+        },
+        "com.raananw.imageResizer": {
+            "PACKAGE_NAME": "com.ionicframework.todo341466"
+        },
+        "com.maginsoft.mfilechooser": {
+            "PACKAGE_NAME": "com.ionicframework.todo341466"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.ionicframework.todo341466"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.todo341466"
+        }
+    },
+    "dependent_plugins": {}
+}

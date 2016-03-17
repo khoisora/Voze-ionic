@@ -1,0 +1,144 @@
+<ion-view title="New Object">
+  <ion-content scrollbar-y="false" class="has-header">
+    <label class="item item-select">
+      <span class="input-label">Select Template</span>
+      <select ng-model="chosenTemplate" ng-change="changeTemplateOfNewObject(chosenTemplate)"
+              ng-options="template as template.name for template in templates"></select>
+    </label>
+
+    <form name="objectForm">
+      <div ng-init="setForm(objectForm)"></div>
+
+      <label class="item item-input ">
+        <span class="input-label"><strong>Name </strong><span class="red">*</span></span>
+        <input required="required" name="objectName" type="text" ng-model="template.name" value="{{template.name}}">
+      </label>
+
+      <div class="red text-center" ng-show="objectForm.objectName.$dirty && objectForm.objectName.$error.required">Name
+        is required!
+      </div>
+
+      <div class="item item-input item-stacked-label" ng-repeat="tem in template" ng-class-even="'even-list'">
+        <strong>{{tem.key}}</strong>
+        <span ng-if="tem.required" class="red">*</span>
+
+        <!--If attr type is text/number/link-->
+        <div ng-if="tem.type === 'text' || tem.type === 'paragraph' || tem.type === 'link' || tem.type === 'number'">
+          <!--validation error message-->
+          <div class="red text-center" ng-show="objectForm[tem.key].$error.pattern">
+            <div class="spacer" style="width: 283px; height: 15px;"></div>
+            This is not a {{tem.type}}!
+          </div>
+
+          <!--Required error message-->
+          <div class="red text-center" ng-show="objectForm[tem.key].$error.required && objectForm[tem.key].$dirty">
+            <div class="spacer" style="width: 283px; height: 15px;"></div>
+            This field is required!
+          </div>
+
+          <!--prop value field-->
+          <div ng-switch="tem.type">
+            <i class="icon placeholder-icon ion-ios-paper-outline"
+               ng-if="tem.type === 'text' || tem.type === 'paragraph' || tem.type === 'link' || tem.type === 'number'"></i>
+
+            <input ng-switch-when="link"
+                   name="{{tem.key}}"
+                   ng-required="tem.required"
+                   value="{{tem.value}}"
+                   placeholder="Enter value"
+                   ng-model="tem.value"
+                   ng-pattern="/^(www|http:\/\/|https:\/\/)/i"/>
+
+            <input ng-switch-when="number"
+                   name="{{tem.key}}"
+                   ng-required="tem.required"
+                   value="{{tem.value}}"
+                   placeholder="Enter value"
+                   ng-model="tem.value"
+                   ng-pattern="/^(\d+)((\.?)(\d+))?$/"/>
+
+            <input ng-switch-default
+                   name="{{tem.key}}"
+                   ng-required="tem.required"
+                   value="{{tem.value}}"
+                   placeholder="Enter value"
+                   ng-model="tem.value"/>
+          </div>
+        </div>
+
+        <!--If attr type is file-->
+        <div ng-if="tem.type === 'file'">
+          <!--Required error message-->
+          <div class="red text-center" ng-show="objectForm[tem.key].$error.required">
+            <div class="spacer" style="width: 283px; height: 15px;"></div>
+            This field is required!
+          </div>
+          <input type="hidden" name="{{tem.key}}" ng-model="dauConMum" ng-required="tem.required && !tem.file">
+
+          <!--If file is not uploaded-->
+          <!--<p ng-if="!tem.file">No file uploaded.</p>-->
+
+          <!--If file is uploaded-->
+          <div ng-if="tem.file">
+            <div class="wrapper"
+                 ng-show="(fileType.imageType.indexOf(tem.file.url.substr(tem.file.url.lastIndexOf('.') + 1)) > -1)"
+                 style='background-image: url({{tem.file.url.replace(" ", "%20")}});'>
+            </div>
+
+            <div ng-show="!(fileType.imageType.indexOf(tem.file.url.substr(tem.file.url.lastIndexOf('.') + 1)) > -1)">
+              <div class="center-image">
+                <img src="img/file-icon.png">
+              </div>
+              <strong>File type: {{tem.file.url.substr(tem.file.url.lastIndexOf('.'))}}</strong>
+            </div>
+          </div>
+
+          <div class="row">
+            <button type="button" ng-click="browseFile($index)"
+                    class="button icon-left ion-folder button-clear button-royal col-50">
+              Upload file
+            </button>
+            <button type="button" ng-click="takePicture($index)"
+                    class="button icon-left ion-camera button-clear button-royal col-50">
+              Take picture
+            </button>
+          </div>
+        </div>
+
+        <!--If attr type is relationship-->
+        <div ng-if="tem.type === 'relationship'">
+          <!--Required error message-->
+          <div class="red text-center" ng-show="objectForm[tem.key].$error.required">
+            <div class="spacer" style="width: 283px; height: 15px;"></div>
+            This field is required!
+          </div>
+          <input type="hidden" name="{{tem.key}}" ng-model="dauConMum" ng-required="tem.required && !tem.relationship">
+
+          <!--If no relationship is set-->
+          <!--<p ng-if="!tem.relationship">No relationships are set</p>-->
+
+          <div ng-show="tem.relationship">
+            <div class="spacer" style="width: 283px; height: 15px;"></div>
+            <div class="col text-center">
+              <strong>{{tem.relationship[0] + " object(s) of type " + tem.relationship[1]}}</strong>
+            </div>
+          </div>
+
+          <div class="col text-center">
+            <button type="button" ng-click="addRelationship(tem)"
+                    class="button icon-left ion-fork-repo button-clear button-royal">{{(tem.relationship)? "Edit" :
+              "Add"}}
+              Relationship
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ion-content>
+
+  <ion-footer-bar>
+    <button type="button" ng-disabled="form.$invalid" ng-click="save()"
+            class="button button-balanced button-block no-side-margin">SAVE
+    </button>
+  </ion-footer-bar>
+</ion-view>

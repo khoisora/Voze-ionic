@@ -1,0 +1,3 @@
+D:\Dropbox\Vooze-ionic\platforms\android\build\intermediates\classes\release
+D:\Dropbox\Vooze-ionic\platforms\android\build\intermediates\pre-dexed\release\classes-0f4b17de34de68446377aac061288bc6c5b4ea04.jar
+D:\Dropbox\Vooze-ionic\platforms\android\build\intermediates\pre-dexed\release\android-support-v4-ca15fb416a385e0fe6dc401c239d0653563a8952.jar

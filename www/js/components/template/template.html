@@ -1,0 +1,200 @@
+<ion-view title="Template Details">
+  <ion-content scrollbar-y="false" class="has-header">
+    <div class="bar bar-header background-light-blue">
+      <h1 class="title " ng-click="editObjectName = true">
+        {{template.name}}
+        <span class="ion-edit"></span>
+      </h1>
+      <button type="button" class="button button-small button-assertive " ng-click="showDeleteActionSheet()">Delete</button>
+    </div>
+    <form name="form">
+      <div ng-init="setForm(form);"></div>
+
+      <div class="spacer" style="width: 283px; height: 40px;"></div>
+      <!--Template name-->
+      <label ng-show="editObjectName" class="item item-input">
+        <span class="input-label"><strong>Template Name</strong></span>
+        <input type="text"
+               ng-change="toggleRefreshBoolean()"
+               ng-blur="editObjectName = false"
+               focus-if="editObjectName"
+               ng-model="template.name"
+               required="required"
+               name="templateName">
+      </label>
+      <div class=" text-center">
+        <span class="red" ng-show="form.templateName.$error.required">Name is required!</span>
+      </div>
+
+
+      <!--table head-->
+
+      <div layout-padding="true" layout="row">
+        <strong flex>Name</strong>
+        <strong flex="25">Required</strong>
+        <strong class="type-column">Type</strong>
+      </div>
+
+      <md-divider></md-divider>
+
+      <div ng-class-even="'even-list'" ng-repeat="attr in template.objectTypeTemplate.template">
+        <div layout-padding="true" layout="row" layout-align="none center">
+          <span flex>{{attr.key}}</span>
+          <md-switch flex="25" ng-model="attr.required" aria-label="{{attr.key}}"></md-switch>
+
+
+          <div class="type-column no-padding-top-bottom" layout="row" layout-align="start">
+            <span ng-if="!attr.isNewAttr && (attr.type === 'relationship' || attr.type === 'file')">{{attr.type}}</span>
+
+            <md-input-container>
+              <md-select
+                aria-label="{{attr.key}}"
+                ng-if="!attr.isNewAttr && (attr.type === 'text' || attr.type === 'paragraph' || attr.type === 'link' || attr.type === 'number')"
+                ng-model="attr.type">
+                <md-option ng-repeat="fileType in fileTextTypes" value="{{fileType}}">
+                  {{fileType}}
+                </md-option>
+              </md-select>
+
+              <md-select
+                aria-label="{{attr.key}}"
+                ng-if="attr.isNewAttr"
+                ng-model="attr.type">
+                <md-option ng-repeat="fileType in fileTypes" value="{{fileType}}">
+                  {{fileType}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+        </div>
+
+        <md-divider></md-divider>
+
+        <!--<div ng-if="$last">-->
+
+            <!--<button ng-click="showAddnew = true" ng-show="!showAddnew" ng-init="showAddnew = false" class="button icon-left ion-plus button-clear button-positive">Add</button>-->
+
+            <!--<div ng-show="showAddnew">-->
+              <!--<div layout-padding="true" layout="row" layout-align="none center">-->
+            <!--<span flex>{{attr.key}}</span>-->
+            <!--<md-switch flex="25" ng-model="attr.required"></md-switch>-->
+
+
+            <!--<div class="type-column" layout="row" layout-align="center center">-->
+              <!--<span ng-if="!attr.isNewAttr && (attr.type === 'relationship' || attr.type === 'file')">{{attr.type}}</span>-->
+
+              <!--<md-input-container>-->
+                <!--<md-select-->
+                  <!--ng-if="!attr.isNewAttr && (attr.type === 'text' || attr.type === 'paragraph' || attr.type === 'link' || attr.type === 'number')"-->
+                  <!--ng-model="attr.type">-->
+                  <!--<md-option ng-repeat="fileType in fileTextTypes" value="{{fileType}}">-->
+                    <!--{{fileType}}-->
+                  <!--</md-option>-->
+                <!--</md-select>-->
+
+                <!--<md-select ng-if="attr.isNewAttr"-->
+                           <!--ng-model="attr.type">-->
+                  <!--<md-option ng-repeat="fileType in fileTypes" value="{{fileType}}">-->
+                    <!--{{fileType}}-->
+                  <!--</md-option>-->
+                <!--</md-select>-->
+              <!--</md-input-container>-->
+            <!--</div>-->
+              <!--</div>-->
+
+
+          <!--</div>-->
+        <!--</div>-->
+      </div>
+
+      <div layout="row" layout-align="center">
+        <a ng-click="showAddNewDialog($event)" class="button icon-left ion-plus button-clear button-positive">Add</a>
+      </div>
+      <span class="red">{{errorMessage}}</span>
+      {{status}}
+      <!--<div class="list card no-side-margin" ng-repeat="attr in template.objectTypeTemplate.template"-->
+      <!--ng-init="attr.oldKey = attr.key">-->
+      <!--<div class="item item-divider">-->
+
+      <!--<div class="row">-->
+      <!--<input class="col" type="text"-->
+      <!--ng-change="checkDuplicateKey(attr.changingKey, $index, form[$index])"-->
+      <!--ng-blur="attr.editKey = false;-->
+      <!--attr.key = attr.changingKey;-->
+      <!--updateTemplateHash();"-->
+      <!--focus-if="attr.editKey"-->
+      <!--ng-show="attr.editKey"-->
+      <!--name="{{$index}}"-->
+      <!--ng-init="attr.changingKey = attr.key"-->
+      <!--ng-model="attr.changingKey">-->
+      <!--<span ng-click="attr.editKey = true" ng-show="!attr.editKey" class="col">-->
+      <!--{{attr.key}}-->
+      <!--<span style="margin-left:10px" class="ion-edit"></span>-->
+      <!--</span>-->
+      <!--<div class="col col-10" ng-click="deleteAttribute($index)"><h2 class="red"><strong>X</strong></h2></div>-->
+      <!--</div>-->
+      <!--<span ng-show="form[$index].$error.duplicateKey" class="red">Duplicate attribute name!</span>-->
+      <!--</div>-->
+
+      <!--<div class="item item-body">-->
+
+        <!--<ion-toggle ng-model="attr.required">Require</ion-toggle>-->
+
+        <!--<label class="item item-input"-->
+               <!--ng-class="!(!attr.isNewAttr && (attr.type === 'relationship' || attr.type === 'file'))? 'item-select':''"-->
+               <!--name="Type">-->
+          <!--<div class="row">-->
+            <!--<span class="input-label">Type</span>-->
+            <!--<span class="col"></span>-->
+
+            <!--<div ng-if="!attr.isNewAttr && (attr.type === 'relationship' || attr.type === 'file')">{{attr.type}}</div>-->
+            <!--<select-->
+              <!--ng-if="!attr.isNewAttr && (attr.type === 'text' || attr.type === 'paragraph' || attr.type === 'link' || attr.type === 'number')"-->
+              <!--ng-model="attr.type"-->
+              <!--ng-options="fileType for fileType in fileTextTypes"></select>-->
+
+            <!--<select ng-if="attr.isNewAttr" ng-model="attr.type"-->
+                    <!--ng-options="fileType for fileType in fileTypes"></select>-->
+          <!--</div>-->
+        <!--</label>-->
+
+      <!--</div>-->
+
+
+      <!--</div>-->
+
+      <!--New attribute-->
+      <!--<div class="list  no-side-margin" ng-show="!showAddnew" >-->
+        <!--<div class="item item-divider">-->
+          <!--<div class="row">-->
+            <!--<div class="col">Add New Attribute</div>-->
+            <!--<button ng-click="addNewAttr()"-->
+              <!--class="col col-20 button icon-left ion-plus button-clear button-positive"</button>-->
+          <!--</div>-->
+          <!--<span class="red">{{errorMessage}}</span>-->
+        <!--</div>-->
+        <!--<div class="item item-body">-->
+          <!--<label class="item item-input" name="Name">-->
+            <!--<span class="input-label">Name</span>-->
+            <!--<input type="text" placeholder="Enter value" ng-model="newAttr.key">-->
+          <!--</label>-->
+
+          <!--<ion-toggle ng-model="newAttr.required">Required</ion-toggle>-->
+
+          <!--<label class="item item-input item-select">-->
+            <!--<div class="input-label">Type</div>-->
+            <!--<select ng-init="newAttr.type = fileTypes[0]" ng-model="newAttr.type"-->
+                    <!--ng-options="fileType for fileType in fileTypes"></select>-->
+          <!--</label>-->
+        <!--</div>-->
+      <!--</div>-->
+
+    </form>
+  </ion-content>
+  <ion-footer-bar>
+    <button type="button" ng-disabled="form.$invalid" type="button" class="button button-positive button-block"
+            ng-click="save(true, form)">
+      SAVE
+    </button>
+  </ion-footer-bar>
+</ion-view>

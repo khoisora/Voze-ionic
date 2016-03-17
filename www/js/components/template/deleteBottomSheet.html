@@ -1,0 +1,31 @@
+<md-bottom-sheet class="md-list">
+    <h4>Choose attribute to delete:</h4>
+  <md-list>
+    <md-list-item  ng-repeat="attr in attrs">
+        <md-button
+          ng-click="confirm($index)"
+          class="md-list-item-content ">
+          <md-icon>cancel</md-icon>
+          <span class="md-inline-list-icon-label">{{attr.key}}</span>
+        </md-button>
+    </md-list-item>
+
+    <md-list-item>
+        <md-button
+          ng-click="confirm(-1)"
+          class="md-list-item-content md-warn">
+          <md-icon>cancel</md-icon>
+          <span class="md-inline-list-icon-label">Delete Template</span>
+        </md-button>
+    </md-list-item>
+
+    <md-list-item>
+        <md-button
+          ng-click="cancel()"
+          class="md-list-item-content md-warn">
+
+          <span class="md-inline-list-icon-label">Cancel</span>
+        </md-button>
+    </md-list-item>
+  </md-list>
+</md-bottom-sheet>

@@ -1,0 +1,77 @@
+<ion-view >
+  <ion-content scrollbar-y="false" class="has-header">
+    <form name="form">
+      <div ng-init="setForm(form);"></div>
+
+      <label class="item item-input background-light-green">
+        <span class="input-label"><strong>Name</strong><span class="red">*</span></span>
+        <input type="text" required="required" required="required" name="templateName" value="{{template.name}}"
+               ng-model="template.name">
+      </label>
+
+      <div class="red text-center" ng-show="form.templateName.$dirty && form.templateName.$error.required">Name is required!</div>
+
+      <div class="list card no-side-margin" ng-repeat="attr in template.objectTypeTemplate.template">
+        <div class="item item-divider">
+          <div class="row">
+            <span class="col">
+              {{attr.key}}
+            </span>
+
+            <div class="col col-10" ng-click="deleteAttribute($index)"><h2 class="red"><strong>X</strong></h2></div>
+          </div>
+        </div>
+
+        <div class="item item-body">
+          <label class="item item-input" name="Name">
+            <span class="input-label">Name</span>
+            <input type="text" required="required" placeholder="Enter value" ng-model="attr.key">
+          </label>
+
+          <ion-toggle ng-model="attr.required">Require</ion-toggle>
+
+          <label class="item item-input item-select" name="Type">
+            <span class="input-label">Type</span>
+            <select ng-init="attr.type = (!attr.type)? fileTypes[0] : attr.type" ng-model="attr.type"
+                    ng-options="fileType for fileType in fileTypes"></select>
+          </label>
+        </div>
+      </div>
+
+      <!--New attribute-->
+      <div class="list card no-side-margin">
+        <div class="item item-divider">
+          <div class="row">
+            <div class="col">{{newAttr.key}}</div>
+            <div class="col col-20" ng-click="addNewAttr()"><a
+              class="button icon-left ion-plus button-clear button-positive"></a></div>
+          </div>
+          <span class="red">{{errorMessage}}</span>
+        </div>
+
+        <div class="item item-body">
+          <label class="item item-input" name="Name">
+            <span class="input-label">Name</span>
+            <input type="text" placeholder="Enter value" ng-model="newAttr.key">
+          </label>
+
+          <ion-toggle ng-model="newAttr.required">Required</ion-toggle>
+
+          <label class="item item-input item-select">
+            <div class="input-label">Type</div>
+            <select ng-init="newAttr.type = fileTypes[0]" ng-model="newAttr.type"
+                    ng-options="fileType for fileType in fileTypes"></select>
+          </label>
+        </div>
+      </div>
+
+    </form>
+  </ion-content>
+
+  <ion-footer-bar>
+    <button type="button" ng-disabled="form.$invalid" class="button button-balanced button-block"
+            ng-click="save(true)">SAVE
+    </button>
+  </ion-footer-bar>
+</ion-view>
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="D:\Dropbox\Vooze-ionic\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\release\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="0038888a4ec8663d47403c4677223eadab10c9d9">
+        <dex dex="D:\Dropbox\Vooze-ionic\platforms\android\build\intermediates\pre-dexed\release\classes-0f4b17de34de68446377aac061288bc6c5b4ea04.jar" />
+    </item>
+    <item
+        jar="D:\Dropbox\Vooze-ionic\platforms\android\libs\android-support-v4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ded9acc6a9792b8f1afc470f0c9cd36d178914cd">
+        <dex dex="D:\Dropbox\Vooze-ionic\platforms\android\build\intermediates\pre-dexed\release\android-support-v4-ca15fb416a385e0fe6dc401c239d0653563a8952.jar" />
+    </item>
+
+</items>

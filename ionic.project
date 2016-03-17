@@ -1,0 +1,10 @@
+{
+  "name": "todo",
+  "app_id": "",
+  "proxies": [
+      {
+        "path": "/login",
+        "proxyUrl": "http://161.202.13.188:9000/user/login"
+      }
+    ]
+}
