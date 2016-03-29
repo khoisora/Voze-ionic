@@ -2,6 +2,20 @@
 <items version="2" >
 
     <item
+        jar="D:\Dropbox\Voze-ionic\platforms\android\libs\android-support-v4.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ded9acc6a9792b8f1afc470f0c9cd36d178914cd">
+        <dex dex="D:\Dropbox\Voze-ionic\platforms\android\build\intermediates\pre-dexed\release\android-support-v4-8a458b2e714310a5f104b9d04263b3d5c836f4e2.jar" />
+    </item>
+    <item
+        jar="D:\Dropbox\Voze-ionic\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\release\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="b17f82c11c56a9385fd054cacbc7e3967781226b">
+        <dex dex="D:\Dropbox\Voze-ionic\platforms\android\build\intermediates\pre-dexed\release\classes-82ec1f60e51fa8231b86b14f1ca91308153b4476.jar" />
+    </item>
+    <item
         jar="D:\Dropbox\Vooze-ionic\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\release\classes.jar"
         jumboMode="false"
         revision="23.0.2"

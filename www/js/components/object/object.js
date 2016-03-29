@@ -130,14 +130,15 @@ myControllers.controller('objectCtrl', function ($scope, storage,$mdBottomSheet,
 
     $scope.changeTemplate = function (chosenTemplate) {
       if (!chosenTemplate) return;
-      //console.log(chosenTemplate);
+      console.log(storage.serverUrl + '/object/get/app/' + storage.chosenAppId + '/objecttype/'
+        + chosenTemplate.id);
       //chosenTemplate = angular.fromJson(chosenTemplate);
-
+      //http://symplcms.com/object/get/app/1/objecttype/8
       $http.get(storage.serverUrl + '/object/get/app/' + storage.chosenAppId + '/objecttype/'
         + chosenTemplate.id).then(function (resp) {
         $scope.objects = resp.data;
       }, function (resp) {
-        console.error('ERR', err);
+        console.error('ERR', resp);
       });
 
       $scope.chosenRelationshipObjects = [];
@@ -357,7 +358,6 @@ function ObjectBottomSheetCtrl($scope, $mdBottomSheet) {
     $mdBottomSheet.cancel();
   };
   $scope.confirm = function(index) {
-    console.log("chinh la tao");
     $mdBottomSheet.hide(index);
   };
 }

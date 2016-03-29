@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/D:/Dropbox/Vooze-ionic/platforms/android/res/values/colors.xml -->
+    <!-- From: file:/D:/Dropbox/Voze-ionic/platforms/android/res/values/colors.xml -->
     <eat-comment/>
     <color name="blue">#ff33b5e5</color>
     <color name="graycolor">#aaaaaa</color>
@@ -9,7 +9,7 @@
     <color name="redcolor">#FF0000</color>
     <color name="stat_font_color">#9c917a</color>
     <color name="transparentgray">#60aaaaaa</color>
-    <!-- From: file:/D:/Dropbox/Vooze-ionic/platforms/android/res/values/strings.xml -->
+    <!-- From: file:/D:/Dropbox/Voze-ionic/platforms/android/res/values/strings.xml -->
     <eat-comment/>
     <string name="activity_name">@string/launcher_name</string>
     <string name="app_name">todo</string>
@@ -21,7 +21,7 @@
     <string name="fileSize">File Size</string>
     <string name="internal">Internal</string>
     <string name="launcher_name">@string/app_name</string>
-    <!-- From: file:/D:/Dropbox/Vooze-ionic/platforms/android/res/values/styles.xml -->
+    <!-- From: file:/D:/Dropbox/Voze-ionic/platforms/android/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--

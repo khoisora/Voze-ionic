@@ -9,4 +9,4 @@
     android:state_focused="false"
     android:drawable="@color/redcolor" />  
 </selector>
-<!-- From: file:/D:/Dropbox/Vooze-ionic/platforms/android/res/drawable/drawer_list_selector.xml -->
+<!-- From: file:/D:/Dropbox/Voze-ionic/platforms/android/res/drawable/drawer_list_selector.xml -->

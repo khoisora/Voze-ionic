@@ -28,14 +28,14 @@
       <div class="red text-center" ng-show="objectForm.objectName.$error.required">Name is required!</div>
       <div class="spacer" style="width: 283px; height: 15px;"></div>
 
-      <div class="padding-left " ng-repeat="tem in tems" ng-class-even="'even-list'" >
+      <div  ng-repeat="tem in tems" ng-class-even="'even-list'" >
         <!--If attr type is text-->
 
-        <div class="object-list" ng-if="tem.type === 'text' || tem.type === 'paragraph' || tem.type === 'link' || tem.type === 'number'" layout="column" layout-align="center none">
+        <div class="object-list" style="padding-bottom:0" ng-if="tem.type === 'text' || tem.type === 'paragraph' || tem.type === 'link' || tem.type === 'number'" layout="column" layout-align="center none">
 
           <md-input-container  class="md-block">
             <label >
-              <b>{{tem.key}}</b>
+              <span class="md-title"><b>{{tem.key}}</b></span>
               <span class="red" ng-if="tem.required">*</span>
             </label>
             <div ng-switch="tem.type">
@@ -71,8 +71,8 @@
         </div>
 
         <!--If attr type is file-->
-        <div class="object-list " ng-if="tem.type === 'file'" >
-          <label><b>{{tem.key}}</b><span class="red" ng-if="tem.required">*</span></label>
+        <div class="object-list" ng-if="tem.type === 'file'" >
+          <label> <span class="md-subhead">{{tem.key}} </span><span class="red" ng-if="tem.required">*</span></label>
           <div layout="row" layout-align="space-between">
             <span></span>
           <!--Required error message-->
@@ -109,9 +109,12 @@
               </div>
 
             </div>
-            <md-button class="md-icon-button" ng-click="showActionSheet($index)">
-              <md-icon class="material-icons">mode_edit</md-icon>
-            </md-button>
+            <div layout="column" layout-align="center">
+              <md-button class="md-icon-button" ng-click="showActionSheet($index)">
+                <md-icon class="material-icons">mode_edit</md-icon>
+              </md-button>
+            </div>
+
           </div>
 
           <!--<md-divider ng-if="!$last"></md-divider>-->
@@ -119,7 +122,7 @@
 
         <!--If attr type is relationship-->
         <div class="object-list" ng-if="tem.type === 'relationship'">
-          <label><b>{{tem.key}}</b>
+          <label> <span class="md-subhead">{{tem.key}}</span>
             <span class="red" ng-if="tem.required">*</span></label>
 
           <!--Required error message-->
@@ -137,7 +140,7 @@
             <p ng-show="!tem.relationship"><strong>No relationships are set</strong></p>
 
             <div ng-show="tem.relationship">
-              <div class="spacer" style="width: 283px; height: 15px;"></div>
+              <div class="spacer" style="width: 283px; height: 5px;"></div>
               <div class="row">
                 <div class="col text-center">
                   <strong>{{tem.relationship[0] + " object(s) of type " + tem.relationship[1]}}</strong>
@@ -145,9 +148,11 @@
               </div>
             </div>
 
-            <md-button class="md-icon-button" ng-click="addRelationship(tem)">
-            <md-icon class="material-icons">mode_edit</md-icon>
-            </md-button>
+            <div layout="column" layout-align="center">
+              <md-button class="md-icon-button" ng-click="addRelationship(tem)">
+              <md-icon class="material-icons">mode_edit</md-icon>
+              </md-button>
+            </div>
             </div>
         </div>
       </div>

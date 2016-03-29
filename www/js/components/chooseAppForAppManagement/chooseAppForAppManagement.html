@@ -1,23 +1,25 @@
 <ion-view title="Choose App">
   <ion-content scrollbar-y="false" class="has-header">
-    <md-subheader class="md-no-sticky">Select your app:</md-subheader>
-
-    <div ng-repeat="app in apps" ng-click="chooseApp(app)">
-    <md-list-item >
-      <md-icon>dashboard</md-icon>
-      <p>{{app.appName}}</p>
-    </md-list-item>
-    <md-divider md-inset></md-divider>
-    </div>
-
-    <!--<form>-->
-      <!--<md-input-container class="md-block">-->
-        <!--<label>Select your app</label>-->
-        <!--<md-select name="myModel" ng-model="chosenApp" ng-change="chooseApp(chosenApp)" ng-model="chosenApp">-->
-          <!--<md-option ng-repeat="app in apps" value="{{app}}">{{app.appName}}</md-option>-->
-        <!--</md-select>-->
-      <!--</md-input-container>-->
-    <!--</form>-->
+    <md-card  md-whiteframe="3" ng-repeat="app in apps">
+      <img ng-src="{{'../img/app-bg/' + ($index % 9) + '.jpg'}}" class="md-card-image">
+      <md-card-title style="padding-bottom:0px; padding-top:10px" >
+        <md-card-title-text layout="row" layout-align="center center">
+          <span class="md-headline">{{app.appName}}</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-actions >
+        <md-card-icon-actions layout="row" layout-align="center center">
+          <md-button ng-click="viewObjects(app)" flex>
+            <md-icon>apps</md-icon>
+            Objects
+          </md-button>
+          <md-button ng-click="viewTemplates(app)" flex>
+            <md-icon>assignment</md-icon>
+            Templates
+          </md-button>
+        </md-card-icon-actions>
+      </md-card-actions>
+    </md-card>
   </ion-content>
   <button ng-click="chooseApp(chosenApp)" class="md-whiteframe-3dp button button-fixed-bottom button-positive button-block ">Confirm</button>
 </ion-view>

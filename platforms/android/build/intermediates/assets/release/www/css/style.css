@@ -8,8 +8,8 @@
   background-size: contain;
 }
 #login-image{
-  background:url(/img/login-bg.jpg) no-repeat center center fixed;
-  background-size:cover;
+  background:url("/img/login-bg.jpg") no-repeat center center fixed;
+  /*background-size:cover;*/
   /*opacity:0.1;*/
 }
 
@@ -108,7 +108,8 @@
 }
 
 .icon-blur{
-  color:white;opacity: 0.3;
+  color:white;
+  opacity: 0.5;
 }
 
 .padding-left{
@@ -116,6 +117,9 @@
 }
 
 .object-list{
+  padding-top:20px;
+  padding-bottom:20px;
+  padding-left:10px;
   min-height:100px;
 }
 

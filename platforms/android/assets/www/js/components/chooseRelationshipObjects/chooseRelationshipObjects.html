@@ -18,7 +18,7 @@
       <input type="text" placeholder="Search" ng-model="searchText.thing.name">
     </label>
 
-    <div class="spacer" style="width: 283px; height: 20px;"></div>
+    <div class="spacer" style="width: 283px; height: 40px;"></div>
 
     <ion-item ng-click="toggleChosenRelationshipObject(object)"
               ng-repeat="object in objects | orderBy:'thing.name' | filter:searchText" ng-click="chooseObject(object)"
@@ -35,9 +35,10 @@
 
     <span class="red">{{errorMessage2}}</span>
 
-    <div class="row button-fixed-bottom">
-      <button ng-click="modal.hide()" class="button button-stable button-block col-50">Back</button>
-      <button ng-click="saveRelationship()" class="button button-positive button-block col-50">Add Relationship</button>
-    </div>
+
   </ion-content>
+  <div class="row button-fixed-bottom">
+    <button ng-click="modal.hide()" class="button button-stable button-block col-50">Back</button>
+    <button ng-click="saveRelationship()" class="button button-positive button-block col-50">Add Relationship</button>
+  </div>
 </ion-modal-view>

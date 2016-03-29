@@ -1,3 +1,3 @@
-D:\Dropbox\Vooze-ionic\platforms\android\build\intermediates\classes\release
-D:\Dropbox\Vooze-ionic\platforms\android\build\intermediates\pre-dexed\release\classes-0f4b17de34de68446377aac061288bc6c5b4ea04.jar
-D:\Dropbox\Vooze-ionic\platforms\android\build\intermediates\pre-dexed\release\android-support-v4-ca15fb416a385e0fe6dc401c239d0653563a8952.jar
+D:\Dropbox\Voze-ionic\platforms\android\build\intermediates\classes\release
+D:\Dropbox\Voze-ionic\platforms\android\build\intermediates\pre-dexed\release\classes-82ec1f60e51fa8231b86b14f1ca91308153b4476.jar
+D:\Dropbox\Voze-ionic\platforms\android\build\intermediates\pre-dexed\release\android-support-v4-8a458b2e714310a5f104b9d04263b3d5c836f4e2.jar

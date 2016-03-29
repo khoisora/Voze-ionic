@@ -7,7 +7,7 @@ myControllers.controller('chooseAppForAppManagementCtrl', function ($scope, stor
 
   $scope.apps = storage.apps;
 
-  $scope.chooseApp = function (chosenApp) {
+  $scope.viewObjects = function (chosenApp) {
     if (!chosenApp) return;
 
     storage.chosenApp = chosenApp;
@@ -25,6 +25,21 @@ myControllers.controller('chooseAppForAppManagementCtrl', function ($scope, stor
         console.error(data);
         $cordovaToast.showShortBottom("Cannot connect. Please try again!");
         return;
+      });
+  };
+
+  $scope.viewTemplates = function (chosenApp2) {
+    if(!chosenApp2) return;
+
+    storage.chosenAppId2 = chosenApp2.id;
+    $http.get(storage.serverUrl + '/objecttype/get/app/' + storage.chosenAppId2)
+      .success(function (data, status, headers, config) {
+        storage.templates2 = data;
+        $state.go('menu.templateManagement');
+      })
+      .error(function (data, status, headers, config) {
+        console.log(data);
+        $cordovaToast.showShortBottom("Cannot connect. Please try again!");
       });
   };
 });
