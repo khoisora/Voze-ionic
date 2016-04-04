@@ -1,9 +1,27 @@
 <ion-view title="Analytics">
   <ion-content class="has-header">
     <!--<ion-scroll direction="x" class="wide-as-needed">-->
-    <nvd3 options='options' data='data'></nvd3>
-    <nvd3 options='options1' data='data1'></nvd3>
-    <nvd3 options='options2' data='data2'></nvd3>
+    <div layout="column" layout-align="center center">
+      <h4>Application Storage (Number objects)</h4>
+    </div>
+    <nvd3 options="options_objApp" data="storage_model.objApp" ></nvd3>
+    <md-divider></md-divider>
+
+
+
+    <!--<div layout="column" layout-align="center center">-->
+      <!--<h4>Top Largest Objects (Mb)</h4>-->
+    <!--</div>-->
+    <!--<nvd3 options="options_topObjects" data="storage_model.topObj" ></nvd3>-->
+    <!--<md-divider></md-divider>-->
+
+
+    <!--<div layout="column" layout-align="center center">-->
+      <!--<h4>Origin</h4>-->
+    <!--</div>-->
+    <!--<nvd3 options="options_origin" data="api_model.apiCountry"></nvd3>-->
+    <!--<md-divider></md-divider>-->
+
       <!--</ion-scroll>-->
 
   </ion-content>

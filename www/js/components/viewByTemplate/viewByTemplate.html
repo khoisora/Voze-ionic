@@ -4,7 +4,7 @@
 
       <md-input-container class="md-block padding">
         <md-select placeholder="Select template" ng-change="changeTemplate(chosenTemplate)" ng-model="chosenTemplate">
-          <md-option ng-repeat="template in templates" value="{{template}}">{{template.name}}</md-option>
+          <md-option ng-selected="$index ==0" ng-repeat="template in templates" value="{{template}}">{{template.name}}</md-option>
         </md-select>
       </md-input-container>
       <!--<label class="item item-select">-->
@@ -44,8 +44,8 @@
           ng-repeat="object in objects | filter:searchText" ng-click="chooseObject($index)"
                       md-rowspan="{{($index % 6 === 0 || $index % 6 === 4)? 2 : 1}}"
                       md-colspan="{{($index % 6 === 0 || $index % 6 === 4)? 2 : 1}}"
-                      ng-init="object.backgroundUrl = object.thing.avatar.url.replace(' ', '%20')"
-                      style="{{(object.thing.avatar)? 'background-image : url(\'' +  object.thing.avatar.url.replace(' ', '%20') + '\'); background-size:cover;' : 'background-color:' + colorArray[$index % 6] + ';'}};">
+                      ng-init="object.backgroundUrl = object.thing.avatar.url.split(' ').join('%20')"
+                      style="{{(object.thing.avatar)? 'background-image : url(' + '\'' +  object.thing.avatar.url.split(' ').join('%20') + '\'' + '); background-size:cover;' : 'background-color:' + colorArray[$index % 6] + ';'}};">
 
           <!--<img ng-if="object.thing.avatar" style="object-fit:cover" ng-src="{{object.thing.avatar.url}}">-->
           <div style="width: 100%; height:{{($index % 6 === 0 || $index % 6 === 4)? '80%' : '60%'}}; position:absolute; top:0; left:0" layout="column" layout-align="center center" >
@@ -75,7 +75,7 @@
     <input flex type="text" ng-model="searchText.thing.name" placeholder="Search">
   </div>
 
-  <md-button ui-sref="menu.newObject" ui-sref-opts="{reload: true}" class="md-fab md-accent md-fab-bottom-right">
+  <md-button ui-sref="menu.newObject" ui-sref-opts="{reload: true}" class="md-fab md-accent fab-fixed-right">
     <md-icon>add</md-icon>
   </md-button>
 </ion-view>

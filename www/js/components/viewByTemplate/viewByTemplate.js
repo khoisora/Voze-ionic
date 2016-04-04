@@ -1,4 +1,4 @@
-myControllers.controller('viewByTemplateCtrl', function ($scope, storage, $state, $http, orderByFilter) {
+myControllers.controller('viewByTemplateCtrl', function ($ionicHistory, $scope, storage, $state, $http, orderByFilter) {
   var convertColor = function(name){
     var colorCode = new Array();
     var i = 0;
@@ -28,8 +28,8 @@ myControllers.controller('viewByTemplateCtrl', function ($scope, storage, $state
     }
   };
 
-  //$scope.colorArray = ['#663399','#FFFF00','#00FF00','#336699','#FF0080','#FF6600'];
-  $scope.colorArray = ['#09FFD6','#FC22FF','#CCA51B','#FF6D02','#18FF10','#3216CC'];
+  $scope.colorArray = ['#D3D3D3','#D3D3D3','#D3D3D3','#D3D3D3','#D3D3D3','#D3D3D3'];
+  //$scope.colorArray = ['#09FFD6','#FC22FF','#CCA51B','#FF6D02','#18FF10','#3216CC'];
 
   $scope.changeTemplate = function (chosenTemplate) {
     if (!chosenTemplate) return;
@@ -60,6 +60,9 @@ myControllers.controller('viewByTemplateCtrl', function ($scope, storage, $state
     $scope.templates = storage.templates;
     $scope.chosenTemplate = (storage.template) ? storage.template : $scope.templates[0];
     $scope.changeTemplate($scope.chosenTemplate);
+
+
+
   });
 
   $scope.chooseObject = function (index) {

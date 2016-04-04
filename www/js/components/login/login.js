@@ -3,7 +3,7 @@ myControllers.controller('loginCtrl', function ($scope, $http, storage, $state, 
 
   $scope.login = function () {
     storage.$reset();
-    storage.serverUrl = 'http://Symplcms.com';
+    storage.serverUrl = 'http://Symplcms.com:9001';
     $http.post(storage.serverUrl + '/user/login', $scope.user).then(function (resp) {
       var apps = [];
       resp.data.apps.forEach(function (app) {

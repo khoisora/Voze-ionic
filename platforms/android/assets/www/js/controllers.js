@@ -1,4 +1,4 @@
-var myControllers = angular.module('app.controllers', ['app.services', 'ionic', 'ngStorage', 'oitozero.ngSweetAlert', 'ngCordova', 'focus-if'])
+var myControllers = angular.module('app.controllers', ['app.services', 'analytic', 'ionic', 'ngStorage', 'oitozero.ngSweetAlert', 'ngCordova', 'focus-if'])
   .factory('storage', function ($localStorage) {
     return $localStorage;
   });

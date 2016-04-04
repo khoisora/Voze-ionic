@@ -1,10 +1,68 @@
 <ion-view title="Analytics">
-  <ion-content class="has-header">
-    <!--<ion-scroll direction="x" class="wide-as-needed">-->
-    <nvd3 options='options' data='data'></nvd3>
-    <nvd3 options='options1' data='data1'></nvd3>
-    <nvd3 options='options2' data='data2'></nvd3>
-      <!--</ion-scroll>-->
+  <ion-content scrollbar-y="false" class="has-header">
+    <md-tabs  md-dynamic-height md-stretch-tabs="always" md-border-bottom="true">
+      <md-tab label="Storage">
+        <!--Application Storage-->
+        <div layout="column" layout-align="center center">
+          <h4>Application Storage (Number objects)</h4>
+        </div>
+        <nvd3 options="options_objApp" data="storage_model.objApp" ></nvd3>
+        <md-divider></md-divider>
+        <!--Top Largest Objects (Mb)-->
+        <div layout="column" layout-align="center center">
+          <h4>Top Largest Objects (Mb)</h4>
+        </div>
+        <nvd3 options="options_topObjects" data="storage_model.topObj" ></nvd3>
+        <md-divider></md-divider>
+        <!--Storage performance-->
+        <div layout="column" layout-align="center center">
+          <h4>Storage performance</h4>
+        </div>
+        <nvd3 options="options_accInfo" data="storage_model.accInfo"></nvd3>
+        <md-divider></md-divider>
+      </md-tab>
 
+      <md-tab label="API Performance">
+        <div layout="column" layout-align="center center">
+          <h4>Origin</h4>
+        </div>
+        <nvd3 options="options_origin" data="api_model.apiCountry"></nvd3>
+        <md-divider></md-divider>
+
+
+        <div layout="column" layout-align="center center">
+          <h4>File Errors Log</h4>
+        </div>
+        <nvd3 options="options_file_errors" data="api_model.fileErrors"></nvd3>
+        <md-divider></md-divider>
+
+        <div layout="column" layout-align="center center">
+          <h4>User Type</h4>
+        </div>
+        <nvd3 options="options_userType" data="data_userType"></nvd3>
+        <md-divider></md-divider>
+
+
+        <div layout="column" layout-align="center center">
+          <h4>API frequency & Response rate</h4>
+        </div>
+        <nvd3 options="options_api" data="api_model.frequency_responseTime" ></nvd3>
+        <md-divider></md-divider>
+
+
+        <div layout="column" layout-align="center center">
+          <h4>Object Views/Hits</h4>
+        </div>
+        <nvd3 options="options_viewHits" data="data_viewHits"></nvd3>
+        <md-divider></md-divider>
+
+
+        <div layout="column" layout-align="center center">
+          <h4>API Errors Log</h4>
+        </div>
+        <nvd3 options="options_api_errors" data="api_model.apiErrors"></nvd3>
+        <md-divider></md-divider>
+      </md-tab>
+    </md-tabs>
   </ion-content>
 </ion-view>

@@ -4,7 +4,7 @@
   </div>
 
   <ion-content scrollbar-y="false" class="has-header ">
-    <label class="item item-select">
+    <label class="item ">
       <span class="input-label">Select Template</span>
       <select ng-model="chosenTemplate" ng-init="chosenTemplate = templates[0]; changeTemplate(chosenTemplate)"
               ng-change="changeTemplate(chosenTemplate)"
@@ -18,20 +18,29 @@
       <input type="text" placeholder="Search" ng-model="searchText.thing.name">
     </label>
 
-    <div class="spacer" style="width: 283px; height: 40px;"></div>
+    <!--<div class="spacer" style="width: 283px; height: 40px;"></div>-->
 
-    <ion-item ng-click="toggleChosenRelationshipObject(object)"
-              ng-repeat="object in objects | orderBy:'thing.name' | filter:searchText" ng-click="chooseObject(object)"
-              class="item-thumbnail-left">
-      <img ng-if="object.thing.avatar" style="object-fit:cover" ng-src="{{object.thing.avatar.url}}">
-      <img ng-if="!object.thing.avatar" src="img/object-icon.png">
+    <div ng-click="toggleChosenRelationshipObject(object)"
+         ng-repeat="object in objects | orderBy:'thing.name' | filter:searchText" ng-click="chooseObject(object)">
+      <md-list-item ng-model="chosenApp" ng-click="chooseTemplate($index)">
+        <md-icon>apps</md-icon>
+        <p>{{object.thing.name}}</p>
+        <label class="checkbox" style="float:right">
+          <input type="checkbox" ng-checked="chosenRelationshipObjects.indexOf(object) > -1">
+        </label>
+      </md-list-item>
+      <md-divider md-inset></md-divider>
+    </div>
 
-      <h2>{{object.thing.name}}</h2>
+    <!--<ion-item ng-click="toggleChosenRelationshipObject(object)"-->
+              <!--ng-repeat="object in objects | orderBy:'thing.name' | filter:searchText" ng-click="chooseObject(object)"-->
+              <!--class="item-thumbnail-left">-->
+      <!--<h2>{{object.thing.name}}</h2>-->
 
-      <label class="checkbox" style="float:right">
-        <input type="checkbox" ng-checked="chosenRelationshipObjects.indexOf(object) > -1">
-      </label>
-    </ion-item>
+      <!--<label class="checkbox" style="float:right">-->
+        <!--<input type="checkbox" ng-checked="chosenRelationshipObjects.indexOf(object) > -1">-->
+      <!--</label>-->
+    <!--</ion-item>-->
 
     <span class="red">{{errorMessage2}}</span>
 

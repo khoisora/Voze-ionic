@@ -84,10 +84,6 @@ myControllers.controller('templateCtrl', function ($scope,$mdDialog, $mdBottomSh
         return;
       } else if ($scope.checkDuplicateKey($scope.newAttr.key)) {
         $cordovaToast.showShortBottom("Failed! Duplicate attribute name!");
-        //$scope.errorMessage = "Duplicate attribute name!";
-        //$timeout(function () {
-        //  $scope.errorMessage = "";
-        //}, 3000);
         return;
       } else {
         //add new attr
@@ -293,7 +289,7 @@ function DialogController($scope, $mdDialog) {
 function TemplateBottomSheetCtrl($scope, $mdBottomSheet, storage) {
   $scope.template = storage.templates2[storage.chosenTemplateIndex2];
   $scope.attrs = $scope.template.objectTypeTemplate.template;
-
+  $scope.hideDeleteTemplate = false;
   $scope.cancel = function() {
     $mdBottomSheet.hide();
   };

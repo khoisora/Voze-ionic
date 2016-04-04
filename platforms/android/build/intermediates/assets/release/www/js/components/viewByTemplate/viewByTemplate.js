@@ -28,8 +28,8 @@ myControllers.controller('viewByTemplateCtrl', function ($scope, storage, $state
     }
   };
 
-  //$scope.colorArray = ['#663399','#FFFF00','#00FF00','#336699','#FF0080','#FF6600'];
-  $scope.colorArray = ['#09FFD6','#FC22FF','#CCA51B','#FF6D02','#18FF10','#3216CC'];
+  $scope.colorArray = ['#D3D3D3','#D3D3D3','#D3D3D3','#D3D3D3','#D3D3D3','#D3D3D3'];
+  //$scope.colorArray = ['#09FFD6','#FC22FF','#CCA51B','#FF6D02','#18FF10','#3216CC'];
 
   $scope.changeTemplate = function (chosenTemplate) {
     if (!chosenTemplate) return;

@@ -1,4 +1,4 @@
-myControllers.controller('newTemplateCtrl', function ($scope, storage, $state, $http, SweetAlert, $cordovaToast, $timeout) {
+myControllers.controller('newTemplateCtrl', function ($scope,$mdBottomSheet, $mdDialog, storage, $state, $http, SweetAlert, $cordovaToast, $timeout) {
   //before enter
   $scope.$on('$ionicView.beforeEnter', function () {
     if (storage.chosenAppId2 == undefined)  $state.go('menu.templateManagement');
@@ -11,6 +11,7 @@ myControllers.controller('newTemplateCtrl', function ($scope, storage, $state, $
 
     $scope.template.objectTypeTemplate.template = [];
 
+    storage.newTemplateAttrs = $scope.template.objectTypeTemplate.template;
     resetAttr();
   });
 
@@ -87,7 +88,7 @@ myControllers.controller('newTemplateCtrl', function ($scope, storage, $state, $
   }
 
   //save
-  {
+
     $scope.save = function (goBackBoolean) {
       if (!$scope.template.name) {
         $scope.errorMessage = "Please enter template name!";
@@ -153,10 +154,52 @@ myControllers.controller('newTemplateCtrl', function ($scope, storage, $state, $
         saveHelper(tems);
       }
     }
-  }
+
 
   //delete
-  $scope.deleteAttribute = function (index) {
-    $scope.template.objectTypeTemplate.template.splice(index, 1);
+  {
+    $scope.showDeleteActionSheet = function () {
+      $mdBottomSheet.show({
+        controller: NewTemplateBottomSheetCtrl,
+        templateUrl: 'js/components/template/deleteBottomSheet.html'
+
+      }).then(function (index) {
+        $scope.deleteAttribute(index);
+      });
+    };
+    $scope.deleteAttribute = function (index) {
+      $scope.template.objectTypeTemplate.template.splice(index, 1);
+    };
+  }
+
+  $scope.showAddNewDialog = function(ev) {
+    $mdDialog.show({
+      controller: DialogController,
+      templateUrl: 'js/components/template/addNewDialog.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    })  .then(function(newAttr) {
+      if(newAttr.key){
+        $scope.newAttr = newAttr;
+        $scope.addNewAttr();
+      }
+    }, function() {
+
+    });
   };
+
 });
+
+
+function NewTemplateBottomSheetCtrl($scope, $mdBottomSheet, storage) {
+  $scope.attrs = storage.newTemplateAttrs;
+
+  $scope.hideDeleteTemplate = true;
+  $scope.cancel = function() {
+    $mdBottomSheet.hide();
+  };
+  $scope.confirm = function(index) {
+    $mdBottomSheet.hide(index);
+  };
+}

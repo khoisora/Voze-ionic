@@ -9,6 +9,8 @@
       <button type="button" class="button button-small button-assertive " ng-click="delete()">Delete</button>
     </div>
 
+
+
     <div class="spacer" style="width: 283px; height: 44px;"></div>
 
     <form name="objectForm">
@@ -72,15 +74,15 @@
 
         <!--If attr type is file-->
         <div class="object-list" ng-if="tem.type === 'file'" >
-          <label> <span class="md-subhead">{{tem.key}} </span><span class="red" ng-if="tem.required">*</span></label>
-          <div layout="row" layout-align="space-between">
+          <label> <span class="md-subhead"><b>{{tem.key}}</b></span><span class="red" ng-if="tem.required">*</span></label>
+          <div layout="column" layout-align="space-between">
             <span></span>
           <!--Required error message-->
-          <div class="red text-center" ng-show="objectForm[tem.key].$error.required">
-            <div class="spacer" style="width: 283px; height: 15px;"></div>
-            This field is required!
-          </div>
-          <input type="hidden" ng-model="dauConMum" name="{{tem.key}}" ng-required="tem.required && !tem.file">
+          <!--<div class="red text-center" ng-show="objectForm[tem.key].$error.required">-->
+            <!--<div class="spacer" style="width: 283px; height: 15px;"></div>-->
+            <!--This field is required!-->
+          <!--</div>-->
+          <!--<input type="hidden" ng-model="dauConMum" name="{{tem.key}}" ng-required="tem.required && !tem.file">-->
 
 
             <!--If file is not uploaded-->
@@ -122,28 +124,27 @@
 
         <!--If attr type is relationship-->
         <div class="object-list" ng-if="tem.type === 'relationship'">
-          <label> <span class="md-subhead">{{tem.key}}</span>
+          <label> <span class="md-subhead"><b>{{tem.key}}</b></span>
             <span class="red" ng-if="tem.required">*</span></label>
 
           <!--Required error message-->
-          <div class="red text-center" ng-show="objectForm[tem.key].$error.required">
-            <div class="spacer" style="width: 283px; height: 15px;"></div>
-            This field is required!
-          </div>
-          <input type="hidden" name="{{tem.key}}" ng-model="dauConMum" ng-required="tem.required && !tem.value">
+          <!--<div class="red text-center" ng-show="objectForm[tem.key].$error.required">-->
+            <!--<div class="spacer" style="width: 283px; height: 15px;"></div>-->
+            <!--This field is required!-->
+          <!--</div>-->
+          <!--<input type="hidden" name="{{tem.key}}" ng-model="dauConMum" ng-required="tem.required && !tem.value">-->
           <!--icon-->
 
           <div layout="row" layout-align="space-between">
             <span></span>
 
             <!--If no relationship is set-->
-            <p ng-show="!tem.relationship"><strong>No relationships are set</strong></p>
-
             <div ng-show="tem.relationship">
               <div class="spacer" style="width: 283px; height: 5px;"></div>
               <div class="row">
                 <div class="col text-center">
-                  <strong>{{tem.relationship[0] + " object(s) of type " + tem.relationship[1]}}</strong>
+                  <strong ng-show="!tem.relationship">No relationships are set</strong>
+                  <strong ng-show="tem.relationship">{{tem.relationship[0] + " object(s) of type " + tem.relationship[1]}}</strong>
                 </div>
               </div>
             </div>

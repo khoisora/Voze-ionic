@@ -1,144 +1,189 @@
 <ion-view title="New Object">
   <ion-content scrollbar-y="false" class="has-header">
-    <label class="item item-select">
-      <span class="input-label">Select Template</span>
-      <select ng-model="chosenTemplate" ng-change="changeTemplateOfNewObject(chosenTemplate)"
-              ng-options="template as template.name for template in templates"></select>
-    </label>
+    <md-tabs class="moveUp" md-dynamic-height md-no-pagination="true" md-center-tabs="true" md-selected="tabIndex">
+      <md-tab  label="main">
+        <md-input-container class="md-block padding">
+          <md-select placeholder="Select template" ng-change="changeTemplateOfNewObject(chosenTemplate)" ng-model="chosenTemplate">
+            <md-option ng-selected="$index ==0" ng-repeat="template in templates" value="{{template}}">{{template.name}}</md-option>
+          </md-select>
+        </md-input-container>
 
-    <form name="objectForm">
-      <div ng-init="setForm(objectForm)"></div>
+        <div class="spacer" style="width: 283px; height: 5px;"></div>
 
-      <label class="item item-input ">
-        <span class="input-label"><strong>Name </strong><span class="red">*</span></span>
-        <input required="required" name="objectName" type="text" ng-model="template.name" value="{{template.name}}">
-      </label>
+        <form name="objectForm">
+          <div ng-init="setForm(objectForm)"></div>
 
-      <div class="red text-center" ng-show="objectForm.objectName.$dirty && objectForm.objectName.$error.required">Name
-        is required!
-      </div>
+          <md-input-container  class="md-block">
+            <label >
+              <span class="md-title"><b>Name</b></span>
+              <span class="red">*</span>
+            </label>
 
-      <div class="item item-input item-stacked-label" ng-repeat="tem in template" ng-class-even="'even-list'">
-        <strong>{{tem.key}}</strong>
-        <span ng-if="tem.required" class="red">*</span>
-
-        <!--If attr type is text/number/link-->
-        <div ng-if="tem.type === 'text' || tem.type === 'paragraph' || tem.type === 'link' || tem.type === 'number'">
-          <!--validation error message-->
-          <div class="red text-center" ng-show="objectForm[tem.key].$error.pattern">
-            <div class="spacer" style="width: 283px; height: 15px;"></div>
-            This is not a {{tem.type}}!
-          </div>
-
-          <!--Required error message-->
-          <div class="red text-center" ng-show="objectForm[tem.key].$error.required && objectForm[tem.key].$dirty">
-            <div class="spacer" style="width: 283px; height: 15px;"></div>
-            This field is required!
-          </div>
-
-          <!--prop value field-->
-          <div ng-switch="tem.type">
-            <i class="icon placeholder-icon ion-ios-paper-outline"
-               ng-if="tem.type === 'text' || tem.type === 'paragraph' || tem.type === 'link' || tem.type === 'number'"></i>
-
-            <input ng-switch-when="link"
-                   name="{{tem.key}}"
-                   ng-required="tem.required"
-                   value="{{tem.value}}"
-                   placeholder="Enter value"
-                   ng-model="tem.value"
-                   ng-pattern="/^(www|http:\/\/|https:\/\/)/i"/>
-
-            <input ng-switch-when="number"
-                   name="{{tem.key}}"
-                   ng-required="tem.required"
-                   value="{{tem.value}}"
-                   placeholder="Enter value"
-                   ng-model="tem.value"
-                   ng-pattern="/^(\d+)((\.?)(\d+))?$/"/>
-
-            <input ng-switch-default
-                   name="{{tem.key}}"
-                   ng-required="tem.required"
-                   value="{{tem.value}}"
-                   placeholder="Enter value"
-                   ng-model="tem.value"/>
-          </div>
-        </div>
-
-        <!--If attr type is file-->
-        <div ng-if="tem.type === 'file'">
-          <!--Required error message-->
-          <div class="red text-center" ng-show="objectForm[tem.key].$error.required">
-            <div class="spacer" style="width: 283px; height: 15px;"></div>
-            This field is required!
-          </div>
-          <input type="hidden" name="{{tem.key}}" ng-model="dauConMum" ng-required="tem.required && !tem.file">
-
-          <!--If file is not uploaded-->
-          <!--<p ng-if="!tem.file">No file uploaded.</p>-->
-
-          <!--If file is uploaded-->
-          <div ng-if="tem.file">
-            <div class="wrapper"
-                 ng-show="(fileType.imageType.indexOf(tem.file.url.substr(tem.file.url.lastIndexOf('.') + 1)) > -1)"
-                 style='background-image: url({{tem.file.url.replace(" ", "%20")}});'>
-            </div>
-
-            <div ng-show="!(fileType.imageType.indexOf(tem.file.url.substr(tem.file.url.lastIndexOf('.') + 1)) > -1)">
-              <div class="center-image">
-                <img src="img/file-icon.png">
+              <input name="newObjectName1"
+                     required = "required"
+                     value="{{tem.value}}"
+                     ng-model="template.name">
+              <div ng-messages="objectForm.newObjectName1.$error" multiple md-auto-hide="true">
+                <div ng-message="required">
+                  This field is required!
+                </div>
               </div>
-              <strong>File type: {{tem.file.url.substr(tem.file.url.lastIndexOf('.'))}}</strong>
+          </md-input-container>
+
+          <div  ng-repeat="tem in template" ng-class-even="'even-list'">
+            <!--If attr type is text-->
+
+            <div class="object-list" style="padding-bottom:0" ng-if="tem.type === 'text' || tem.type === 'paragraph' || tem.type === 'link' || tem.type === 'number'" layout="column" layout-align="center none">
+
+              <md-input-container  class="md-block">
+                <label >
+                  <span class="md-title"><b>{{tem.key}}</b></span>
+                  <span class="red" ng-if="tem.required">*</span>
+                </label>
+                <div ng-switch="tem.type">
+                  <input ng-switch-when="link"
+                         name="{{tem.key}}"
+                         ng-required="tem.required"
+                         value="{{tem.value}}"
+                         ng-model="tem.value"
+                         ng-pattern="/^(www|http:\/\/|https:\/\/)/i">
+
+                  <input ng-switch-when="number"
+                         name="{{tem.key}}"
+                         ng-required="tem.required"
+                         value="{{tem.value}}"
+                         ng-model="tem.value"
+                         ng-pattern="/^(\d+)((\.?)(\d+))?$/"/>
+
+                  <input ng-switch-default
+                         name="{{tem.key}}"
+                         ng-required="tem.required"
+                         value="{{tem.value}}"
+                         ng-model="tem.value"/>
+                </div>
+                <div ng-messages="objectForm[tem.key].$error" multiple md-auto-hide="true">
+                  <div ng-message="required">
+                    This field is required!
+                  </div>
+                  <div ng-message="pattern">
+                    This is not a {{tem.type}}!
+                  </div>
+                </div>
+              </md-input-container>
+            </div>
+
+            <!--If attr type is file-->
+            <div class="object-list" ng-if="tem.type === 'file'" >
+              <label> <span class="md-subhead"><b>{{tem.key}}</b></span><span class="red" ng-if="tem.required">*</span></label>
+              <div layout="row" layout-align="space-between">
+                <span></span>
+                <!--If file is not uploaded-->
+                <div ng-if="!tem.file">
+                  <span layout="column" layout-align="center center" style="height:60px">
+                    <div flex class="material-icons" style="font-size:40px; color:lightgray"> description</div>
+
+                    <p><strong>No file uploaded.</strong></p>
+                  </span>
+                </div>
+                <!--If file is uploaded-->
+                <div ng-if="tem.file">
+
+                  <div class="wrapper"
+                       ng-show="(fileType.imageType.indexOf(tem.file.url.substr(tem.file.url.lastIndexOf('.') + 1)) > -1)"
+                       style='background-image: url(&#39;{{tem.file.url.split(" ").join("%20")}}&#39;);'>
+                  </div>
+
+                  <div ng-show="!(fileType.imageType.indexOf(tem.file.url.substr(tem.file.url.lastIndexOf('.') + 1)) > -1)">
+                      <span layout="column" layout-align="center center" style="height:60px">
+                      <!--<div class="column " >-->
+                        <div flex class="material-icons" style="font-size:40px; color:orange"> description</div>
+
+                        <p>File Type: <strong>{{tem.file.url.substr(tem.file.url.lastIndexOf('.') + 1)}}</strong></p>
+                      </span>
+                  </div>
+
+                </div>
+                <div layout="column" layout-align="center">
+                  <md-button class="md-icon-button" ng-click="showActionSheet($index)">
+                    <md-icon class="material-icons">mode_edit</md-icon>
+                  </md-button>
+                </div>
+
+              </div>
+
+              <!--<md-divider ng-if="!$last"></md-divider>-->
+            </div>
+
+            <!--If attr type is relationship-->
+            <div class="object-list" ng-if="tem.type === 'relationship'">
+              <label> <span class="md-subhead"><b>{{tem.key}}</b></span>
+                <span class="red" ng-if="tem.required">*</span></label>
+
+
+              <div layout="row" layout-align="space-between">
+                <span></span>
+
+                <!--If no relationship is set-->
+                <div>
+                  <div class="spacer" style="width: 283px; height: 5px;"></div>
+                  <div class="row">
+                    <div class="col text-center">
+                      <strong ng-show="!tem.relationship">No relationships are set</strong>
+                      <strong ng-show="tem.relationship">{{tem.relationship[0] + " object(s) of type " + tem.relationship[1]}}</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div layout="column" layout-align="center">
+                  <md-button class="md-icon-button" ng-click="changeTab(tem)">
+                    <md-icon class="material-icons">mode_edit</md-icon>
+                  </md-button>
+                </div>
+              </div>
             </div>
           </div>
+        </form>
+      </md-tab>
 
-          <div class="row">
-            <button type="button" ng-click="browseFile($index)"
-                    class="button icon-left ion-folder button-clear button-royal col-50">
-              Upload file
-            </button>
-            <button type="button" ng-click="takePicture($index)"
-                    class="button icon-left ion-camera button-clear button-royal col-50">
-              Take picture
-            </button>
-          </div>
-        </div>
+      <md-tab label="second">
+        <md-input-container class="md-block padding">
+          <md-select
+            placeholder="Select template" ng-change="changeTemplate(chosenTemplate)"
+            ng-model="chosenTemplate">
+            <md-option ng-selected="$index ==0" ng-repeat="template in templates" value="{{template}}">{{template.name}}</md-option>
+          </md-select>
+        </md-input-container>
 
-        <!--If attr type is relationship-->
-        <div ng-if="tem.type === 'relationship'">
-          <!--Required error message-->
-          <div class="red text-center" ng-show="objectForm[tem.key].$error.required">
-            <div class="spacer" style="width: 283px; height: 15px;"></div>
-            This field is required!
-          </div>
-          <input type="hidden" name="{{tem.key}}" ng-model="dauConMum" ng-required="tem.required && !tem.relationship">
+        <md-divider></md-divider>
 
-          <!--If no relationship is set-->
-          <!--<p ng-if="!tem.relationship">No relationships are set</p>-->
-
-          <div ng-show="tem.relationship">
-            <div class="spacer" style="width: 283px; height: 15px;"></div>
-            <div class="col text-center">
-              <strong>{{tem.relationship[0] + " object(s) of type " + tem.relationship[1]}}</strong>
+        <div ng-click="toggleChosenRelationshipObject(object)"
+             ng-repeat="object in objects | orderBy:'thing.name' | filter:searchText" ng-click="chooseObject(object)">
+          <md-list-item class="md-2-line" ng-model="chosenApp" ng-click="chooseTemplate($index)">
+            <md-icon class="icon-in-list">apps</md-icon>
+            <div class="md-list-item-text">
+              <p>{{object.thing.name}}</p>
             </div>
-          </div>
-
-          <div class="col text-center">
-            <button type="button" ng-click="addRelationship(tem)"
-                    class="button icon-left ion-fork-repo button-clear button-royal">{{(tem.relationship)? "Edit" :
-              "Add"}}
-              Relationship
-            </button>
-          </div>
+            <label class="checkbox" style="float:right">
+              <input type="checkbox" ng-checked="chosenRelationshipObjects.indexOf(object) > -1">
+            </label>
+          </md-list-item>
+          <md-divider md-inset></md-divider>
         </div>
-      </div>
-    </form>
+
+        <span class="red">{{errorMessage2}}</span>
+      </md-tab>
+    </md-tabs>
   </ion-content>
 
   <ion-footer-bar>
-    <button type="button" ng-disabled="form.$invalid" ng-click="save()"
-            class="button button-balanced button-block no-side-margin">SAVE
+    <button ng-show="tabIndex == 0" type="button" ng-disabled="form.$invalid" ng-click="save()"
+            class="button main-bg-color button-block no-side-margin">SAVE
     </button>
+
+
+    <div ng-show="tabIndex == 1"  class="row button-fixed-bottom">
+      <button ng-click="returnToMainTab()" class="button  button-block col-50">Back</button>
+      <button  ng-disabled="chosenRelationshipObjects.length == 0" ng-click="saveRelationship()" class="button main-bg-color button-block col-50">Add Relationship</button>
+    </div>
   </ion-footer-bar>
 </ion-view>

@@ -9,8 +9,7 @@
           <span class="md-inline-list-icon-label">{{attr.key}}</span>
         </md-button>
     </md-list-item>
-
-    <md-list-item>
+    <md-list-item ng-if="!hideDeleteTemplate">
         <md-button
           ng-click="confirm(-1)"
           class="md-list-item-content md-warn">

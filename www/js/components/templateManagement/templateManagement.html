@@ -17,7 +17,7 @@
 
     <div ng-repeat="template in templates | filter: searchText">
       <md-list-item ng-model="chosenApp" ng-click="chooseTemplate($index)">
-        <md-icon>assignment</md-icon>
+        <md-icon class="icon-in-list">assignment</md-icon>
         <p>{{template.name}}</p>
       </md-list-item>
       <md-divider md-inset></md-divider>

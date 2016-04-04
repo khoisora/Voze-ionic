@@ -1,4 +1,4 @@
-myControllers.controller('newObjectCtrl', function ($scope, storage, $state, $http, UploadService, fileType, SweetAlert, $ionicModal, $cordovaToast, $ionicLoading) {
+myControllers.controller('newObjectCtrl', function ($scope, storage, $mdBottomSheet, $state, $http, UploadService, fileType, SweetAlert, $ionicModal, $cordovaToast, $ionicLoading) {
   //before enter
   {
     $scope.$on('$ionicView.beforeEnter', function () {
@@ -19,6 +19,8 @@ myControllers.controller('newObjectCtrl', function ($scope, storage, $state, $ht
 
     $scope.template = [];
     $scope.changeTemplateOfNewObject = function (chosenTemplate) {
+      chosenTemplate = angular.fromJson(chosenTemplate);
+
       $http.get(storage.serverUrl + '/objecttype/get/' + chosenTemplate.id).then(function (resp) {
         $scope.chosenObjectType = resp.data;
         $scope.template = $scope.chosenObjectType.objectTypeTemplate.template;
@@ -27,6 +29,17 @@ myControllers.controller('newObjectCtrl', function ($scope, storage, $state, $ht
       });
     };
   }
+
+  $scope.showActionSheet = function(index1){
+
+    $mdBottomSheet.show({
+      templateUrl: 'js/components/object/bottomSheet.html',
+      controller: ObjectBottomSheetCtrl
+    }).then(function(index) {
+      if(index == 0) $scope.takePicture(index1);
+      else $scope.browseFile(index1);
+    });
+  };
 
   //before leave, if user made any changes, ask to save
   {
@@ -240,3 +253,5 @@ myControllers.controller('newObjectCtrl', function ($scope, storage, $state, $ht
     }
   }, false);
 });
+
+

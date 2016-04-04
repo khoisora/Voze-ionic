@@ -1,5 +1,5 @@
 angular.module('app.services', ['ngCordova', 'cfp.loadingBar', 'ngAnimate'])
-.service('UploadService',  function(cfpLoadingBar, $cordovaFileTransfer, $cordovaToast){
+.service('UploadService',  function(cfpLoadingBar, $cordovaFileTransfer, $cordovaToast, storage){
   this.uploadFile = function(fileURI, ionicLoading) {
     var trustAllHosts = true;
 
@@ -8,7 +8,7 @@ angular.module('app.services', ['ngCordova', 'cfp.loadingBar', 'ngAnimate'])
     ftOptions.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
     ftOptions.httpMethod = 'POST';
 
-    return $cordovaFileTransfer.upload('http://161.202.13.188:9000/file/upload', fileURI, ftOptions, trustAllHosts)
+    return $cordovaFileTransfer.upload(storage.serverUrl + '/file/upload', fileURI, ftOptions, trustAllHosts)
       .then(function (result) {
           $cordovaToast.showShortBottom("File Uploaded!");
           return result.response;
