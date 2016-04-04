@@ -21,7 +21,6 @@ myControllers.controller('analyticsCtrl', function ($scope, SymplAPIService,stor
   self.api_model.fileErrors = [];
   self.api_model.apiErrors = [];
   self.api_model.apiCountry = [];
-  self.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   self.apps = [];
   self.apps_api = [];
   self.periodDisableStorage = true;
@@ -86,19 +85,15 @@ myControllers.controller('analyticsCtrl', function ($scope, SymplAPIService,stor
   var apiError_30days_country = {};
   var hasCountry;
 
-  if(self.apps[0]){
+  if(storage.chosenApp3){
     self.showDashBoard = true;
 
-    self.storage_app = JSON.parse(JSON.stringify(self.apps[0]));
-    self.api_app = JSON.parse(JSON.stringify(self.apps_api[0].id));
+    self.storage_app = JSON.parse(JSON.stringify(storage.chosenApp3.appName));
+    self.api_app = JSON.parse(JSON.stringify(storage.chosenApp3.id));
 
-    self.currentAPIAppChosen = JSON.parse(JSON.stringify(self.apps_api[0].appName));
+    self.currentAPIAppChosen = JSON.parse(JSON.stringify(storage.chosenApp3.appName));
 
     userId = storage.user.id;
-
-    //if (self.currentUser.superUser){
-    //  userId = self.currentUser.superUser.id;
-    //}
 
 
     today = new Date();
@@ -125,7 +120,7 @@ myControllers.controller('analyticsCtrl', function ($scope, SymplAPIService,stor
       //self.storage_model.topObj = convertTopObjsGraphData(allTopObjectsApps[id]);
       //storage.apps[0].appName;
       //console.log(allTopObjectsApps[storage.apps[1].appName]);
-      //console.log(allTopObjectsApps);
+      console.log(self.storage_app);
       self.storage_model.topObj = convertTopObjsGraphData(allTopObjectsApps[self.storage_app]);
 
     });
@@ -144,6 +139,13 @@ myControllers.controller('analyticsCtrl', function ($scope, SymplAPIService,stor
     self.showDashBoard = false;
   }
 
+  self.changeCountry = function(c){
+    //c = angular.fromJson(c);
+    self.selectedCountry = c;
+    self.showCountry = true;
+    console.log(self.selectedCountry);
+    apply30DaysCountryData();
+  }
 
   function formatDate(today){
     var dd = today.getDate();
@@ -570,7 +572,7 @@ myControllers.controller('analyticsCtrl', function ($scope, SymplAPIService,stor
       self.api_model.frequency_responseTime = convertApiTimeGraphData(allApiAndTimeInfo);
     });
     SymplAPIService.getAPICountByCountry(userId,id,from,to).then(function(data){
-      console.log(data);
+      //console.log(data);
       loadAPICountry(data);
     });
     SymplAPIService.getAPICountByDevice(userId,id,false,from,to).then(function(data){
@@ -633,7 +635,7 @@ myControllers.controller('analyticsCtrl', function ($scope, SymplAPIService,stor
     self.api_model.apiCountry = apiCountry30days;
     self.data_userType  = userType30days;
     self.data_viewHits = convertViewHitsGraphData(allViewHitsData_30days);
-    self.api_model.fileErrors = fileErrors_30days
+    self.api_model.fileErrors = fileErrors_30days;
     self.api_model.apiErrors = apiError_30days;
 
   }

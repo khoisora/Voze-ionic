@@ -1,6 +1,8 @@
-<ion-view title="Object Details">
-  <ion-content scrollbar-y="false" class="has-header">
+<ion-view title="Object Details" ng-cloak>
 
+  <ion-content scrollbar-y="false" class="has-header">
+    <md-tabs class="moveUp" md-dynamic-height md-no-pagination="true" md-center-tabs="true" md-selected="tabIndex">
+      <md-tab  label="main">
     <div class="bar bar-header background-light-blue">
       <h1 class="title " ng-click="editObjectName = true">
         {{object.thing.name}}
@@ -8,8 +10,6 @@
       </h1>
       <button type="button" class="button button-small button-assertive " ng-click="delete()">Delete</button>
     </div>
-
-
 
     <div class="spacer" style="width: 283px; height: 44px;"></div>
 
@@ -74,15 +74,15 @@
 
         <!--If attr type is file-->
         <div class="object-list" ng-if="tem.type === 'file'" >
-          <label> <span class="md-subhead"><b>{{tem.key}}</b></span><span class="red" ng-if="tem.required">*</span></label>
-          <div layout="column" layout-align="space-between">
+          <label> <span class="md-subhead colorGray"><strong>{{tem.key}}</strong></span><span class="red" ng-if="tem.required">*</span></label>
+          <div layout="row" layout-align="space-between">
             <span></span>
           <!--Required error message-->
           <!--<div class="red text-center" ng-show="objectForm[tem.key].$error.required">-->
             <!--<div class="spacer" style="width: 283px; height: 15px;"></div>-->
             <!--This field is required!-->
           <!--</div>-->
-          <!--<input type="hidden" ng-model="dauConMum" name="{{tem.key}}" ng-required="tem.required && !tem.file">-->
+          <input type="hidden" ng-model="dauConMum" name="{{tem.key}}" ng-required="tem.required && !tem.file">
 
 
             <!--If file is not uploaded-->
@@ -97,16 +97,15 @@
             <div ng-if="tem.file">
 
               <div class="wrapper"
-                   ng-show="(fileType.imageType.indexOf(tem.file.url.substr(tem.file.url.lastIndexOf('.') + 1)) > -1)"
-                   style='background-image: url({{tem.file.url.replace(" ", "%20")}});'>
+                   ng-show="(fileType.imageType.indexOf(tem.file.url.substr(tem.file.url.lastIndexOf('.') + 1).toLowerCase()) > -1)"
+                   style='background-image: url(&#39;{{tem.file.url.split(" ").join("%20")}}&#39;);'>
               </div>
-
-              <div ng-show="!(fileType.imageType.indexOf(tem.file.url.substr(tem.file.url.lastIndexOf('.') + 1)) > -1)">
+              <div ng-show="!(fileType.imageType.indexOf(tem.file.url.substr(tem.file.url.lastIndexOf('.') + 1).toLowerCase()) > -1)">
                   <span layout="column" layout-align="center center" style="height:60px">
                   <!--<div class="column " >-->
                     <div flex class="material-icons" style="font-size:40px; color:orange"> description</div>
 
-                    <p>File Type: <strong>{{tem.file.url.substr(tem.file.url.lastIndexOf('.') + 1)}}</strong></p>
+                    <p>File Type: <strong>{{tem.file.url.substr(tem.file.url.lastIndexOf('.') + 1).toLowerCase()}}</strong></p>
                   </span>
               </div>
 
@@ -124,22 +123,14 @@
 
         <!--If attr type is relationship-->
         <div class="object-list" ng-if="tem.type === 'relationship'">
-          <label> <span class="md-subhead"><b>{{tem.key}}</b></span>
+          <label> <span class="md-subhead colorGray"><b>{{tem.key}}</b></span>
             <span class="red" ng-if="tem.required">*</span></label>
 
-          <!--Required error message-->
-          <!--<div class="red text-center" ng-show="objectForm[tem.key].$error.required">-->
-            <!--<div class="spacer" style="width: 283px; height: 15px;"></div>-->
-            <!--This field is required!-->
-          <!--</div>-->
-          <!--<input type="hidden" name="{{tem.key}}" ng-model="dauConMum" ng-required="tem.required && !tem.value">-->
-          <!--icon-->
-
+{{form.$invalid}}
           <div layout="row" layout-align="space-between">
-            <span></span>
-
+            <input type="hidden" ng-model="dauConMum" name="{{tem.key}}" ng-required="tem.required && !tem.relationship">
             <!--If no relationship is set-->
-            <div ng-show="tem.relationship">
+            <div>
               <div class="spacer" style="width: 283px; height: 5px;"></div>
               <div class="row">
                 <div class="col text-center">
@@ -150,7 +141,7 @@
             </div>
 
             <div layout="column" layout-align="center">
-              <md-button class="md-icon-button" ng-click="addRelationship(tem)">
+              <md-button class="md-icon-button" ng-click="changeTab(tem)">
               <md-icon class="material-icons">mode_edit</md-icon>
               </md-button>
             </div>
@@ -158,11 +149,47 @@
         </div>
       </div>
     </form>
+      </md-tab>
+
+      <!--second tab-->
+      <md-tab label="second">
+        <md-input-container class="md-block padding">
+          <md-select
+                     placeholder="Select template" ng-change="changeTemplate(chosenTemplate)"
+                     ng-model="chosenTemplate">
+            <md-option ng-selected="$index ==0" ng-repeat="template in templates" value="{{template}}">{{template.name}}</md-option>
+          </md-select>
+        </md-input-container>
+
+        <md-divider></md-divider>
+
+        <div ng-click="toggleChosenRelationshipObject(object)"
+             ng-repeat="object in objects | orderBy:'thing.name' | filter:searchText" ng-click="chooseObject(object)">
+          <md-list-item class="md-2-line" ng-model="chosenApp" ng-click="chooseTemplate($index)">
+            <md-icon class="icon-in-list">apps</md-icon>
+            <div class="md-list-item-text">
+              <p>{{object.thing.name}}</p>
+            </div>
+            <label class="checkbox" style="float:right">
+              <input type="checkbox" ng-checked="chosenRelationshipObjects.indexOf(object) > -1">
+            </label>
+          </md-list-item>
+          <md-divider md-inset></md-divider>
+        </div>
+
+        <span class="red">{{errorMessage2}}</span>
+      </md-tab>
+      </md-tabs>
   </ion-content>
 
   <ion-footer-bar>
-    <button type="button" ng-disabled="form.$invalid" ng-click="save(true)"
-            class="button button-positive button-block ">SAVE
+    <button ng-show="tabIndex == 0" type="button" ng-disabled="form.$invalid" ng-click="save(true)"
+            class="button main-bg-color button-block ">SAVE
     </button>
+
+    <div ng-show="tabIndex == 1"  class="row button-fixed-bottom">
+      <button ng-click="returnToMainTab()" class="button main-bg-color button-block col-50">Back</button>
+      <button  ng-disabled="chosenRelationshipObjects.length == 0" ng-click="saveRelationship()" class="button main-bg-color button-block col-50">Add Relationship</button>
+    </div>
   </ion-footer-bar>
 </ion-view>

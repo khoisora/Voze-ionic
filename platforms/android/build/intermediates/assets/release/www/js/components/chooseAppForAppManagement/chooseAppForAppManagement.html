@@ -1,25 +1,31 @@
 <ion-view title="Choose App">
   <ion-content scrollbar-y="false" class="has-header">
-    <md-card  md-whiteframe="3" ng-repeat="app in apps">
+    <md-card  md-whiteframe="3" ng-repeat="app in apps" class="no-side-margin">
       <img src="{{'img/app-bg/' + ($index % 9) + '.jpg'}}" class="md-card-image" style="max-height: 150px;object-fit: cover;">
       <md-card-title style="padding-bottom:0px; padding-top:10px" >
         <md-card-title-text layout="row" layout-align="center center">
           <span class="md-headline">{{app.appName}}</span>
         </md-card-title-text>
       </md-card-title>
-      <md-card-actions >
-        <md-card-icon-actions layout="row" layout-align="center center">
-          <md-button ng-click="viewObjects(app)" flex>
-            <md-icon>apps</md-icon>
-            Objects
+      <md-card-actions>
+        <md-card-icon-actions layout="row" layout-align="space-between center">
+          <md-button ng-click="viewAnalytics(app)" >
+            <md-icon>timeline</md-icon>
+            Analytics
           </md-button>
-          <md-button ng-click="viewTemplates(app)" flex>
+
+          <md-button ng-click="viewTemplates(app)" >
             <md-icon>assignment</md-icon>
             Templates
+          </md-button>
+
+          <md-button ng-click="viewObjects(app)" >
+            <md-icon>apps</md-icon>
+            Objects
           </md-button>
         </md-card-icon-actions>
       </md-card-actions>
     </md-card>
   </ion-content>
-  <button ng-click="chooseApp(chosenApp)" class="md-whiteframe-3dp button button-fixed-bottom button-positive button-block ">Confirm</button>
+  <!--<button ng-click="chooseApp(chosenApp)" class="md-whiteframe-3dp button button-fixed-bottom button-positive button-block ">Confirm</button>-->
 </ion-view>

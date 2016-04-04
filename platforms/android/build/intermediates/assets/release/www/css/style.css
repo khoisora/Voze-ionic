@@ -27,9 +27,11 @@
 }
 
 .background-light-blue{
-  background-color: lightblue;
+  background-color: lightslategrey;
 }
-
+.background-light-blue .title{
+  color:white;
+}
 .button-small{
   line-height:21px;
 }
@@ -73,14 +75,15 @@
 }
 
 .fab-fixed-right{
-  position:absolute;
-  bottom: 10%;
+  position:fixed;
+  bottom: 50px;
   right:10%;
 }
 
 .type-column{
   width:90px;
 }
+
 
 .no-padding-top-bottom{
   padding-top:0;
@@ -121,3 +124,21 @@
   min-height:100px;
 }
 
+
+.moveUp .md-center-tabs{
+  display: none;
+  height:0;
+}
+
+.colorGray{
+  color:LightGray ;
+}
+
+.icon-in-list{
+  margin-right:30px; margin-left: 10px;
+}
+
+.main-bg-color{
+  background-color: #454E59;
+  color:white;
+}

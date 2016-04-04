@@ -1,4 +1,4 @@
-myControllers.controller('objectCtrl', function ($scope, storage,$mdBottomSheet, $state, $http, SweetAlert, UploadService, fileType, $ionicModal, $ionicLoading, $cordovaToast, $ionicPlatform, $timeout) {
+myControllers.controller('objectCtrl', function ($scope, storage, $mdBottomSheet, $ionicHistory, $state, $http, SweetAlert, UploadService, fileType, $ionicLoading, $cordovaToast, $ionicPlatform, $timeout) {
   //other functions
   $scope.fileType = fileType;
 
@@ -11,6 +11,17 @@ myControllers.controller('objectCtrl', function ($scope, storage,$mdBottomSheet,
   $scope.$on('$ionicView.beforeEnter', function () {
     if (storage.chosenObjectIndex == null) $state.go('login');
     $scope.refreshBoolean = false;
+    //$ionicHistory.goBack(-1);
+    //console.log($ionicHistory.viewHistory());
+
+    //$scope.goBackView = function(){
+    //  $ionicHistory.goBack(-1);
+    //  console.log("yeh");
+    //}
+
+
+    $scope.tabIndex = 0;
+
     //helper functions
     {
       //get relationship name
@@ -111,29 +122,26 @@ myControllers.controller('objectCtrl', function ($scope, storage,$mdBottomSheet,
 
 //modal
   {
-    $ionicModal.fromTemplateUrl('js/components/chooseRelationshipObjects/chooseRelationshipObjects.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function (modal) {
-      $scope.modal = modal;
-    });
-
-    $scope.$on('$destroy', function () {
-      $scope.modal.remove();
-    });
-
-    $scope.$on('modal.hidden', function () {
-      $scope.chosenRelationshipObjects = [];
-    });
+    //$ionicModal.fromTemplateUrl('js/components/chooseRelationshipObjects/chooseRelationshipObjects.html', {
+    //  scope: $scope,
+    //  animation: 'slide-in-up'
+    //}).then(function (modal) {
+    //  $scope.modal = modal;
+    //});
+    //
+    //$scope.$on('$destroy', function () {
+    //  $scope.modal.remove();
+    //});
+    //
+    //$scope.$on('modal.hidden', function () {
+    //  $scope.chosenRelationshipObjects = [];
+    //});
 
     $scope.templates = storage.templates;
 
     $scope.changeTemplate = function (chosenTemplate) {
       if (!chosenTemplate) return;
-      console.log(storage.serverUrl + '/object/get/app/' + storage.chosenAppId + '/objecttype/'
-        + chosenTemplate.id);
-      //chosenTemplate = angular.fromJson(chosenTemplate);
-      //http://symplcms.com/object/get/app/1/objecttype/8
+      chosenTemplate = angular.fromJson(chosenTemplate);
       $http.get(storage.serverUrl + '/object/get/app/' + storage.chosenAppId + '/objecttype/'
         + chosenTemplate.id).then(function (resp) {
         $scope.objects = resp.data;
@@ -143,7 +151,10 @@ myControllers.controller('objectCtrl', function ($scope, storage,$mdBottomSheet,
 
       $scope.chosenRelationshipObjects = [];
     };
+
+    $scope.chosenTemplate = $scope.templates[0]; $scope.changeTemplate($scope.chosenTemplate);
   }
+
 
 //relationship
   {
@@ -157,10 +168,14 @@ myControllers.controller('objectCtrl', function ($scope, storage,$mdBottomSheet,
       }
     };
 
-    $scope.addRelationship = function (tem) {
+    $scope.changeTab = function (tem) {
       $scope.chosenTem = tem;
-      $scope.modal.show();
+      $scope.tabIndex = 1;
     };
+
+    $scope.returnToMainTab = function(){
+      $scope.tabIndex = 0;
+    }
 
     $scope.saveRelationship = function () {
       if ($scope.chosenRelationshipObjects.length == 0) {
@@ -187,7 +202,7 @@ myControllers.controller('objectCtrl', function ($scope, storage,$mdBottomSheet,
 
       $scope.chosenTem.relationship = [$scope.chosenRelationshipObjects.length, templateName];
       $scope.chosenTem.relationshipPara = relatedObjects;
-      $scope.modal.hide();
+      $scope.returnToMainTab();
       $scope.chosenTem.value = relationshipValue;
       $scope.form.$setDirty();
     }

@@ -6,7 +6,7 @@ myControllers.controller('newObjectCtrl', function ($scope, storage, $mdBottomSh
         $state.go('menu.viewByTemplate');
         $cordovaToast.showShortBottom("Please create template first!");
       }
-
+      $scope.tabIndex = 0;
       $scope.templates = storage.templates;
       $scope.chosenTemplate = (storage.template) ? storage.template : $scope.templates[0];
       $scope.changeTemplateOfNewObject($scope.chosenTemplate);
@@ -15,6 +15,16 @@ myControllers.controller('newObjectCtrl', function ($scope, storage, $mdBottomSh
 
   //init
   {
+
+    $scope.changeTab = function (tem) {
+      $scope.chosenTem = tem;
+      $scope.tabIndex = 1;
+    };
+
+    $scope.returnToMainTab = function(){
+      $scope.tabIndex = 0;
+    }
+
     $scope.fileType = fileType;
 
     $scope.template = [];
@@ -91,6 +101,7 @@ myControllers.controller('newObjectCtrl', function ($scope, storage, $mdBottomSh
 
     $scope.changeTemplate = function (chosenTemplate) {
       if (!chosenTemplate) return;
+      chosenTemplate = angular.fromJson(chosenTemplate);
 
       $http.get(storage.serverUrl + '/object/get/app/' + storage.chosenAppId + '/objecttype/'
         + chosenTemplate.id).then(function (resp) {

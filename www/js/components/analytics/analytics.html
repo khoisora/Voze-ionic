@@ -23,6 +23,14 @@
       </md-tab>
 
       <md-tab label="API Performance">
+        <md-input-container class="md-block padding">
+          <md-select placeholder="Select template" ng-change="changeCountry(c)" ng-model="c">
+            <md-option ng-selected="$index == 0" ng-repeat="c in countries_api" value="{{c.country}}">{{c.country}}</md-option>
+          </md-select>
+        </md-input-container>
+        countries_api
+
+
         <div layout="column" layout-align="center center">
           <h4>Origin</h4>
         </div>

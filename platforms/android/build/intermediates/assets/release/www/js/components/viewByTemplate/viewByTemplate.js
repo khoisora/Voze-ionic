@@ -1,4 +1,4 @@
-myControllers.controller('viewByTemplateCtrl', function ($scope, storage, $state, $http, orderByFilter) {
+myControllers.controller('viewByTemplateCtrl', function ($ionicHistory, $scope, storage, $state, $http, orderByFilter) {
   var convertColor = function(name){
     var colorCode = new Array();
     var i = 0;
@@ -60,6 +60,9 @@ myControllers.controller('viewByTemplateCtrl', function ($scope, storage, $state
     $scope.templates = storage.templates;
     $scope.chosenTemplate = (storage.template) ? storage.template : $scope.templates[0];
     $scope.changeTemplate($scope.chosenTemplate);
+
+
+
   });
 
   $scope.chooseObject = function (index) {

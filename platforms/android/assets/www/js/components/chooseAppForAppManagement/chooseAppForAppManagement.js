@@ -19,7 +19,7 @@ myControllers.controller('chooseAppForAppManagementCtrl', function ($scope, stor
         //console.log(angular.toJson(data));
 
         storage.templates = data;
-        $state.go('menu.viewByTemplate', null, {reload: true});
+        $state.go('menu.viewByTemplate');
       })
       .error(function (data, status, headers, config) {
         console.error(data);
@@ -42,4 +42,10 @@ myControllers.controller('chooseAppForAppManagementCtrl', function ($scope, stor
         $cordovaToast.showShortBottom("Cannot connect. Please try again!");
       });
   };
+
+  $scope.viewAnalytics = function(chosenApp3){
+    storage.chosenApp3 = chosenApp3;
+    console.log(storage.chosenApp3);
+    $state.go('menu.analytics');
+  }
 });

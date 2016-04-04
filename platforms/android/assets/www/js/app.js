@@ -16,7 +16,6 @@ angular.module('app', ['ionic','ngMaterial','ngMessages', 'nvd3', 'app.controlle
   $ionicConfigProvider.backButton.text('Back').previousTitleText(false);
   cfpLoadingBarProvider.includeSpinner = false;
   cfpLoadingBarProvider.latencyThreshold = 300;
-
   $mdThemingProvider.theme('default')
   .primaryPalette('blue')
   .accentPalette('orange');
