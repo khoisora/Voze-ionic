@@ -1,0 +1,29 @@
+<ion-view title="Login" id="login-image">
+  <ion-content scroll="false" class="has-header" >
+    <div layout="column" layout-align="space-around" style="height: 100%">
+
+      <div class="logo-box">
+        <img src='img/FHCNt4jKRuWM8WUTthri_symplcmsapplogo.png'
+           style="width: 150px; height: auto;">
+      </div>
+
+      <span></span>
+      <span></span>
+    <form>
+      <div class="list padding" >
+        <label class="item item-input" style="opacity: 0.5">
+          <i class="icon ion-person placeholder-icon"></i>
+          <input type="text" ng-model="user.email" placeholder="Username">
+        </label>
+
+        <label class="item item-input" style="opacity: 0.5">
+          <i class="icon ion-locked placeholder-icon"></i>
+          <input type="password" ng-model="user.password" placeholder="Password">
+        </label>
+      </div>
+      <button ng-click=login() style="opacity: 0.7" class="button main-bg-color button-block "><b>Log in</b></button>
+    </form>
+    </div>
+  </ion-content>
+
+</ion-view>

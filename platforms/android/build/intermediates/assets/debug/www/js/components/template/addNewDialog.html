@@ -1,0 +1,49 @@
+<md-dialog>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Add New Attribute</h2>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+    <div class="md-dialog-content">
+      <form name="form">
+        <md-input-container class="md-block">
+          <label>Attribute Name</label>
+          <input md-autofocus name="name"  required="required" ng-model="newAttr.key">
+          <div ng-messages="form.name.$error" multiple md-auto-hide="true">
+            <div ng-message="required">
+              This field is required!
+            </div>
+          </div>
+        </md-input-container>
+
+        <div layout="row" layout-align="space-between center">
+        <label>Required</label>
+
+        <md-switch aria-label="wtf" ng-model="newAttr.required"></md-switch>
+        </div>
+
+        <div layout="row" layout-align="space-between center">
+          <label>Type</label>
+
+          <md-select aria-label="wtf"
+            ng-model="newAttr.type">
+            <md-option ng-repeat="fileType in fileTypes"  value="{{fileType}}">
+              {{fileType}}
+            </md-option>
+          </md-select>
+        </div>
+
+      </form>
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions layout="row">
+    <md-button ng-click="cancel()">
+      Cancel
+    </md-button>
+    <md-button ng-click="confirm(form)">
+      Confirm
+    </md-button>
+  </md-dialog-actions>
+  </form>
+</md-dialog>

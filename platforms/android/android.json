@@ -51,6 +51,22 @@
                         {
                             "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"*\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<allow-navigation href=\"content:*\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"loadUrlTimeoutValue\" value=\"180000\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"jsHybugger\"><param name=\"android-package\" value=\"org.jshybugger.cordova.JsHybuggerPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -86,6 +102,10 @@
                     "/manifest/application": [
                         {
                             "xml": "<activity android:exported=\"true\" android:label=\"@string/app_name\" android:name=\"com.orleonsoft.android.simplefilechooser.ui.FileChooserActivity\" android:screenOrientation=\"portrait\"></activity>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<provider android:authorities=\"com.ionicframework.todo341466.jsHybugger\" android:enabled=\"true\" android:exported=\"false\" android:name=\"org.jshybugger.DebugContentProvider\"><meta-data android:name=\"debugPort\" android:value=\"8888\" /><meta-data android:name=\"releaseBuildDebugging\" android:value=\"true\" /><meta-data android:name=\"excludeFiles\" android:value=\"*.min.js,*/cordova.js\" /><meta-data android:name=\"excludeHosts\" android:value=\"*.google*.com,*.twitter.com,*.gstatic.com\" /><meta-data android:name=\"mimeTypesHtml\" android:value=\".html\" /><meta-data android:name=\"mimeTypesJavascript\" android:value=\".js\" /><meta-data android:name=\"proxyEnabled\" android:value=\"false\" /><meta-data android:name=\"proxyPort\" android:value=\"8080\" /><meta-data android:name=\"upstreamProxyEnabled\" android:value=\"false\" /><meta-data android:name=\"upstreamProxyHost\" android:value=\"192.168.178.1\" /><meta-data android:name=\"upstreamProxyPort\" android:value=\"8080\" /></provider>",
                             "count": 1
                         }
                     ]
@@ -193,6 +213,9 @@
             "PACKAGE_NAME": "com.ionicframework.todo341466"
         },
         "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.todo341466"
+        },
+        "org.jshybugger.cordova": {
             "PACKAGE_NAME": "com.ionicframework.todo341466"
         }
     },
@@ -480,6 +503,12 @@
             "id": "cordova-plugin-whitelist.whitelist",
             "pluginId": "cordova-plugin-whitelist",
             "runs": true
+        },
+        {
+            "file": "plugins/org.jshybugger.cordova/www/jsHybuggerLoader.js",
+            "id": "org.jshybugger.cordova.jsHybuggerLoader",
+            "pluginId": "org.jshybugger.cordova",
+            "runs": true
         }
     ],
     "plugin_metadata": {
@@ -493,6 +522,7 @@
         "com.raananw.imageResizer": "0.1.2",
         "com.maginsoft.mfilechooser": "1.0.0",
         "cordova-plugin-x-toast": "2.4.0",
-        "cordova-plugin-whitelist": "1.2.2-dev"
+        "cordova-plugin-whitelist": "1.2.2-dev",
+        "org.jshybugger.cordova": "4.5.9"
     }
 }

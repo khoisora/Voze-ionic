@@ -1,0 +1,76 @@
+<ion-view title="Analytics">
+  <ion-content scrollbar-y="false" class="has-header">
+    <md-tabs  md-dynamic-height md-stretch-tabs="always" md-border-bottom="true">
+      <md-tab label="Storage">
+        <!--Application Storage-->
+        <div layout="column" layout-align="center center">
+          <h4>Application Storage (Number objects)</h4>
+        </div>
+        <nvd3 options="options_objApp" data="storage_model.objApp" ></nvd3>
+        <md-divider></md-divider>
+        <!--Top Largest Objects (Mb)-->
+        <div layout="column" layout-align="center center">
+          <h4>Top Largest Objects (Mb)</h4>
+        </div>
+        <nvd3 options="options_topObjects" data="storage_model.topObj" ></nvd3>
+        <md-divider></md-divider>
+        <!--Storage performance-->
+        <div layout="column" layout-align="center center">
+          <h4>Storage performance</h4>
+        </div>
+        <nvd3 options="options_accInfo" data="storage_model.accInfo"></nvd3>
+        <md-divider></md-divider>
+      </md-tab>
+
+      <md-tab label="API Performance">
+        <md-input-container class="md-block padding">
+          <md-select placeholder="Select template" ng-change="changeCountry(c)" ng-model="c">
+            <md-option ng-selected="$index == 0" ng-repeat="c in countries_api" value="{{c.country}}">{{c.country}}</md-option>
+          </md-select>
+        </md-input-container>
+        countries_api
+
+
+        <div layout="column" layout-align="center center">
+          <h4>Origin</h4>
+        </div>
+        <nvd3 options="options_origin" data="api_model.apiCountry"></nvd3>
+        <md-divider></md-divider>
+
+
+        <div layout="column" layout-align="center center">
+          <h4>File Errors Log</h4>
+        </div>
+        <nvd3 options="options_file_errors" data="api_model.fileErrors"></nvd3>
+        <md-divider></md-divider>
+
+        <div layout="column" layout-align="center center">
+          <h4>User Type</h4>
+        </div>
+        <nvd3 options="options_userType" data="data_userType"></nvd3>
+        <md-divider></md-divider>
+
+
+        <div layout="column" layout-align="center center">
+          <h4>API frequency & Response rate</h4>
+        </div>
+        <nvd3 options="options_api" data="api_model.frequency_responseTime" ></nvd3>
+        <md-divider></md-divider>
+
+
+        <div layout="column" layout-align="center center">
+          <h4>Object Views/Hits</h4>
+        </div>
+        <nvd3 options="options_viewHits" data="data_viewHits"></nvd3>
+        <md-divider></md-divider>
+
+
+        <div layout="column" layout-align="center center">
+          <h4>API Errors Log</h4>
+        </div>
+        <nvd3 options="options_api_errors" data="api_model.apiErrors"></nvd3>
+        <md-divider></md-divider>
+      </md-tab>
+    </md-tabs>
+  </ion-content>
+</ion-view>

@@ -120,7 +120,9 @@ myControllers.controller('analyticsCtrl', function ($scope, SymplAPIService,stor
       //self.storage_model.topObj = convertTopObjsGraphData(allTopObjectsApps[id]);
       //storage.apps[0].appName;
       //console.log(allTopObjectsApps[storage.apps[1].appName]);
-      console.log(self.storage_app);
+      //$scope.dungroi = data;
+      // console.log("dis me" + data);
+      //alert(angular.toJson(data));
       self.storage_model.topObj = convertTopObjsGraphData(allTopObjectsApps[self.storage_app]);
 
     });
@@ -253,7 +255,7 @@ myControllers.controller('analyticsCtrl', function ($scope, SymplAPIService,stor
     });
     self.countries_api = JSON.parse(JSON.stringify(results));
 //console.log(self.countries_api);
-    self.selectedCountry =  self.countries_api[0].country;
+    if(self.countries_api[0])    {self.selectedCountry =  self.countries_api[0].country;}
 
     self.api_model.apiCountry = results;
     if(apiCountry30days.length ==0){
@@ -973,12 +975,12 @@ myControllers.controller('analyticsCtrl', function ($scope, SymplAPIService,stor
       legend: {
         margin: {
           top: 5,
-          right: 70,
+          right: 10,
           bottom: 5,
           left: 0
         }
       },
-      noData:"No Errors have been captured"
+      noData:"No Data"
     }
   };
 
@@ -1005,7 +1007,7 @@ myControllers.controller('analyticsCtrl', function ($scope, SymplAPIService,stor
           left: 0
         }
       },
-      noData:"No Errors have been captured"
+      noData:"No Data"
     }
   };
 
@@ -1118,7 +1120,7 @@ myControllers.controller('analyticsCtrl', function ($scope, SymplAPIService,stor
       legend: {
         margin: {
           top: 5,
-          right: 35,
+          right: 5,
           bottom: 5,
           left: 0
         }

@@ -1,4 +1,4 @@
-myControllers.controller('templateCtrl', function ($scope,$mdDialog, $mdBottomSheet, storage, $state, $http, SweetAlert, $timeout, $cordovaToast) {
+myControllers.controller('templateCtrl', function ($scope,$mdDialog, $mdBottomSheet, storage,SweetAlert, $state, $http, $timeout, $cordovaToast) {
 //templateHash to check duplicate attr name
   $scope.templateHash = {
     _currentIndex: 0,
@@ -179,27 +179,6 @@ myControllers.controller('templateCtrl', function ($scope,$mdDialog, $mdBottomSh
         });
     };
 
-    //if ($scope.newAttr.key) {
-    //  SweetAlert.swal({
-    //      title: "Save " + $scope.newAttr.key + " ?",
-    //      text: "You have an unsaved new property",
-    //      type: "warning",
-    //      showCancelButton: true,
-    //      confirmButtonColor: "#DD6B55", confirmButtonText: "Yes",
-    //      cancelButtonText: "No",
-    //    },
-    //    function (isConfirm) {
-    //      if (isConfirm) {
-    //        var tem = {};
-    //        tem.key = $scope.newAttr.key;
-    //        tem.required = $scope.newAttr.required;
-    //        tem.type = $scope.newAttr.type;
-    //        tems.push(tem);
-    //        $scope.addNewAttr();
-    //      }
-    //      saveHelper(tems);
-    //    });
-    //} else {
       saveHelper(tems);
     //}
   };
@@ -212,7 +191,10 @@ myControllers.controller('templateCtrl', function ($scope,$mdDialog, $mdBottomSh
         templateUrl: 'js/components/template/deleteBottomSheet.html'
 
       }).then(function(index) {
-        if(index === -1)  $scope.deleteTemplate();
+        if(index === -1)  {
+          $scope.deleteTemplate();
+
+        }
         else {
           console.log("delete");
           $scope.deleteAttribute(index);
@@ -220,42 +202,28 @@ myControllers.controller('templateCtrl', function ($scope,$mdDialog, $mdBottomSh
       });
 
 
-      //$ionicActionSheet.show({
-      //  buttons: buttons,
-      //  titleText: '<b>Which attribute to delete?</b>',
-      //  cancelText: 'Cancel',
-      //  buttonClicked: function(index) {
-      //    if(index == $scope.template.objectTypeTemplate.template.length - 1) $scope.deleteTemplate();
-      //    else $scope.deleteAttribute(index);
-      //  }
-      //});
     };
 
     $scope.deleteTemplate = function () {
-      SweetAlert.swal({
-          title: "Are you sure?",
-          text: "Your will not be able to recover this!",
-          type: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, delete it!",
-          cancelButtonText: "No, cancel plx!",
-          closeOnConfirm: false,
-          closeOnCancel: false
-        },
-        function (isConfirm) {
-          if (isConfirm) {
-            $http.delete(storage.serverUrl + '/objecttype/delete/' + $scope.template.id).then(function (res) {
-              //console.log("deleted " + res);
-              storage.templates2.splice(storage.chosenTemplateIndex2, 1);
-              SweetAlert.swal("Deleted!", "Your template has been deleted.", "success");
-              $state.go('menu.templateManagement');
-            }, function (error) {
-              console.log(error.data);
-            });
-          } else {
-            SweetAlert.swal("Cancelled", "Your template is safe :)", "error");
-          }
-        });
+      var confirm = $mdDialog.confirm()
+        .title('Are you sure?')
+        .textContent('Your will not be able to recover this!')
+        .ok('Yes')
+        .cancel('Cancel');
+      $mdDialog.show(confirm).then(function() {
+        console.log("goi hai lan");
+        $http.delete(storage.serverUrl + '/objecttype/delete/' + $scope.template.id).then(function (res) {
+                  console.log("deleted " + $scope.template.id);
+                  storage.templates2.splice(storage.chosenTemplateIndex2, 1);
+                  $state.go('menu.templateManagement');
+                }, function (error) {
+                  console.log(error.data);
+                  $cordovaToast.showShortBottom("Failed to delete!");
+                });
+      }, function() {
+        $cordovaToast.showShortBottom("Your Template is safe!");
+      });
+
     };
 
     $scope.deleteAttribute = function (index) {
@@ -291,7 +259,7 @@ function TemplateBottomSheetCtrl($scope, $mdBottomSheet, storage) {
   $scope.attrs = $scope.template.objectTypeTemplate.template;
   $scope.hideDeleteTemplate = false;
   $scope.cancel = function() {
-    $mdBottomSheet.hide();
+    $mdBottomSheet.cancel();
   };
   $scope.confirm = function(index) {
     $mdBottomSheet.hide(index);

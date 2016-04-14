@@ -1,0 +1,32 @@
+<md-bottom-sheet class="md-list md-has-header" ng-cloak>
+  <h4>Choose action:</h4>
+  <md-list>
+    <md-list-item>
+
+      <md-button flex
+        ng-click="confirm(0)"
+        class="md-list-item-content md-primary md-raised">
+        <md-icon>camera</md-icon>
+        <span class="md-inline-list-icon-label">Take Photo</span>
+      </md-button>
+    </md-list-item>
+
+    <md-list-item>
+      <md-button flex
+        ng-click="confirm(1)"
+        class="md-list-item-content md-primary md-raised">
+        <md-icon>folder</md-icon>
+        <span class="md-inline-list-icon-label">Upload File</span>
+      </md-button>
+    </md-list-item>
+
+    <md-list-item >
+      <md-button flex
+        ng-click="cancel()"
+        class="md-list-item-content md-warn">
+        <md-icon>cancel</md-icon>
+        <span class="md-inline-list-icon-label">Cancel</span>
+      </md-button>
+    </md-list-item>
+  </md-list>
+</md-bottom-sheet>

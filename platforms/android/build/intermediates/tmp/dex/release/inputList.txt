@@ -1,3 +1,4 @@
 D:\Dropbox\Voze-ionic\platforms\android\build\intermediates\classes\release
 D:\Dropbox\Voze-ionic\platforms\android\build\intermediates\pre-dexed\release\classes-82ec1f60e51fa8231b86b14f1ca91308153b4476.jar
 D:\Dropbox\Voze-ionic\platforms\android\build\intermediates\pre-dexed\release\android-support-v4-8a458b2e714310a5f104b9d04263b3d5c836f4e2.jar
+D:\Dropbox\Voze-ionic\platforms\android\build\intermediates\pre-dexed\release\jshybugger-library-8f7d9186724ffb50978ed1ab11eabd05f783dad9.jar

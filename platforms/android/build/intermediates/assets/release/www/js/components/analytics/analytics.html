@@ -10,7 +10,8 @@
         <md-divider></md-divider>
         <!--Top Largest Objects (Mb)-->
         <div layout="column" layout-align="center center">
-          <h4>Top Largest Objects (Mb)</h4>
+          <h4>Top Largest Objects (MB)</h4>
+          {{dungroi}}
         </div>
         <nvd3 options="options_topObjects" data="storage_model.topObj" ></nvd3>
         <md-divider></md-divider>
@@ -28,7 +29,6 @@
             <md-option ng-selected="$index == 0" ng-repeat="c in countries_api" value="{{c.country}}">{{c.country}}</md-option>
           </md-select>
         </md-input-container>
-        countries_api
 
 
         <div layout="column" layout-align="center center">

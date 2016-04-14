@@ -11,7 +11,7 @@ angular.module('app', ['ionic','ngMaterial','ngMessages', 'nvd3', 'app.controlle
   });
 })
 
-.config(['$stateProvider', '$urlRouterProvider','$ionicConfigProvider','cfpLoadingBarProvider', '$mdThemingProvider', function($stateProvider, $urlRouterProvider, $ionicConfigProvider,cfpLoadingBarProvider, $mdThemingProvider) {
+.config(['$stateProvider', '$urlRouterProvider','$ionicConfigProvider','cfpLoadingBarProvider', '$mdThemingProvider', '$provide', function($stateProvider, $urlRouterProvider, $ionicConfigProvider,cfpLoadingBarProvider, $mdThemingProvider, $provide) {
   $ionicConfigProvider.views.maxCache(1);
   $ionicConfigProvider.backButton.text('Back').previousTitleText(false);
   cfpLoadingBarProvider.includeSpinner = false;
@@ -19,4 +19,23 @@ angular.module('app', ['ionic','ngMaterial','ngMessages', 'nvd3', 'app.controlle
   $mdThemingProvider.theme('default')
   .primaryPalette('blue')
   .accentPalette('orange');
+
+  //$provide.decorator("$exceptionHandler", function($delegate, $injector) {
+  //  return function(exception, cause) {
+  //
+  //    var data = {
+  //      message: "Exception: " + exception.message,
+  //      stack: exception.stack || "none"
+  //    };
+  //
+  //
+  //
+  //    alert(JSON.stringify(data));
+  //
+  //    // Call The original Angular Exception Handler
+  //    $delegate(exception, cause);
+  //
+  //  };
+  //});
 }]);
+

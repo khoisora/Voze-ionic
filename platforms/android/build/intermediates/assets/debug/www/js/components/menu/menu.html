@@ -1,0 +1,28 @@
+<ion-side-menus enable-menu-with-back-views="true">
+  <ion-side-menu-content>
+    <ion-nav-bar class="main-bg-color md-whiteframe-3dp" >
+      <ion-nav-back-button >
+      </ion-nav-back-button>
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="right">
+        </button>
+
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="side-menu"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="right">
+    <ion-header-bar class="main-bg-color">
+      <div class="title">Menu</div>
+    </ion-header-bar>
+    <ion-content padding="false" class="side-menu-right has-header">
+      <ion-list>
+        <ion-item ui-sref="menu.chooseAppForAppManagement" menu-close=""><md-icon>dashboard</md-icon>App Management</ion-item>
+        <!--<ion-item ui-sref="menu.templateManagement" menu-close=""><md-icon>assignment</md-icon> Template Management</ion-item>-->
+        <!--<ion-item ui-sref="menu.analytics" menu-close=""><md-icon>timeline</md-icon> Analytics</ion-item>-->
+        <ion-item ui-sref="login" menu-close=""><md-icon>exit_to_app</md-icon> Log Out</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

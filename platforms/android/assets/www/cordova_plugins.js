@@ -282,6 +282,12 @@ module.exports = [
         "id": "cordova-plugin-whitelist.whitelist",
         "pluginId": "cordova-plugin-whitelist",
         "runs": true
+    },
+    {
+        "file": "plugins/org.jshybugger.cordova/www/jsHybuggerLoader.js",
+        "id": "org.jshybugger.cordova.jsHybuggerLoader",
+        "pluginId": "org.jshybugger.cordova",
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -297,7 +303,8 @@ module.exports.metadata =
     "com.raananw.imageResizer": "0.1.2",
     "com.maginsoft.mfilechooser": "1.0.0",
     "cordova-plugin-x-toast": "2.4.0",
-    "cordova-plugin-whitelist": "1.2.2-dev"
+    "cordova-plugin-whitelist": "1.2.2-dev",
+    "org.jshybugger.cordova": "4.5.9"
 }
 // BOTTOM OF METADATA
 });

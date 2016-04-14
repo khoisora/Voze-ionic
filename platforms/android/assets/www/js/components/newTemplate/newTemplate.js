@@ -197,7 +197,7 @@ function NewTemplateBottomSheetCtrl($scope, $mdBottomSheet, storage) {
 
   $scope.hideDeleteTemplate = true;
   $scope.cancel = function() {
-    $mdBottomSheet.hide();
+    $mdBottomSheet.cancel();
   };
   $scope.confirm = function(index) {
     $mdBottomSheet.hide(index);

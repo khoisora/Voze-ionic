@@ -1,0 +1,81 @@
+<ion-view title="View By Template" ng-cloak>
+  <ion-content scrollbar-y="false" class="has-header">
+    <form class="list">
+
+      <md-input-container class="md-block padding">
+        <md-select placeholder="Select template" ng-change="changeTemplate(chosenTemplate)" ng-model="chosenTemplate">
+          <md-option ng-selected="$index ==0" ng-repeat="template in templates" value="{{template}}">{{template.name}}</md-option>
+        </md-select>
+      </md-input-container>
+      <!--<label class="item item-select">-->
+        <!--<span class="input-label">Select Template</span>-->
+        <!--<select ng-model="chosenTemplate" ng-change="changeTemplate(chosenTemplate)"-->
+                <!--ng-options="template as template.name for template in templates">-->
+        <!--</select>-->
+      <!--</label>-->
+
+      <!--<div class="spacer" style="width: 283px; height: 10px;"></div>-->
+
+      <!--<div class="row">-->
+        <!--<button ui-sref="menu.newObject" ui-sref-opts="{reload: true}"-->
+                <!--class="button icon-left ion-plus-round button-positive col-25">New-->
+        <!--</button>-->
+        <!--<span class="col"></span>-->
+        <!--<label class="item item-input col-70">-->
+          <!--<i class="icon ion-search placeholder-icon"></i>-->
+          <!--<input type="text" placeholder="Search" ng-model="searchText.thing.name">-->
+        <!--</label>-->
+      <!--</div>-->
+
+      <!--<div class="spacer" style="width: 283px; height: 10px;"></div>-->
+      <!--<div ng-repeat="object in objects | filter:searchText">-->
+        <!--<md-list-item ng-click="chooseObject($index)">-->
+          <!--<md-icon>dashboard</md-icon>-->
+          <!--<p>{{object.thing.name}}</p>-->
+        <!--</md-list-item>-->
+        <!--<md-divider md-inset></md-divider>-->
+      <!--</div>-->
+
+
+
+      <md-grid-list md-cols="3" md-row-height="2:2" md-gutter="10px" >
+
+        <md-grid-tile class="md-whiteframe-8dp"
+          ng-repeat="object in objects | filter:searchText" ng-click="chooseObject($index)"
+                      md-rowspan="{{($index % 6 === 0 || $index % 6 === 4)? 2 : 1}}"
+                      md-colspan="{{($index % 6 === 0 || $index % 6 === 4)? 2 : 1}}"
+                      ng-init="object.backgroundUrl = object.thing.avatar.url.split(' ').join('%20')"
+                      style="{{(object.thing.avatar)? 'background-image : url(' + '\'' +  object.thing.avatar.url.split(' ').join('%20') + '\'' + '); background-size:cover;' : 'background-color:' + colorArray[$index % 6] + ';'}};">
+
+          <!--<img ng-if="object.thing.avatar" style="object-fit:cover" ng-src="{{object.thing.avatar.url}}">-->
+          <div style="width: 100%; height:{{($index % 6 === 0 || $index % 6 === 4)? '80%' : '60%'}}; position:absolute; top:0; left:0" layout="column" layout-align="center center" >
+
+            <i class="icon" ng-class="{'icon-blur ion-cube' : !(object.thing.avatar),'small-object-icon' : !($index % 6 === 0 || $index % 6 === 4), 'large-object-icon' : ($index % 6 === 0 || $index % 6 === 4) }"
+              ></i>
+
+            <!--<span flex = "30"></span>-->
+          </div>
+
+          <md-grid-tile-footer class="bottom-blur-white" layout="row" layout-align="center center">
+            <h3><strong>{{object.thing.name}}</strong></h3>
+          </md-grid-tile-footer>
+        </md-grid-tile>
+      </md-grid-list>
+      <!--<ion-item ng-repeat="object in objects | filter:searchText" ng-click="chooseObject($index)"-->
+                <!--class="item-thumbnail-left">-->
+        <!--<img ng-if="object.thing.avatar" style="object-fit:cover" ng-src="{{object.thing.avatar.url}}">-->
+        <!--<img ng-if="!object.thing.avatar" src="img/object-icon.png">-->
+        <!--<h2>{{object.thing.name}}</h2>-->
+      <!--</ion-item>-->
+    </form>
+  </ion-content>
+
+  <div layout="row" layout-align="none none" md-no-float class="bottom-blur-white md-block button-fixed-bottom">
+    <md-icon>search</md-icon>
+    <input flex type="text" ng-model="searchText.thing.name" placeholder="Search">
+  </div>
+
+  <md-button ui-sref="menu.newObject" ui-sref-opts="{reload: true}" class="md-fab md-accent fab-fixed-right">
+    <md-icon>add</md-icon>
+  </md-button>
+</ion-view>

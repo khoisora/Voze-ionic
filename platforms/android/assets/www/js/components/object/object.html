@@ -126,7 +126,6 @@
           <label> <span class="md-subhead colorGray"><b>{{tem.key}}</b></span>
             <span class="red" ng-if="tem.required">*</span></label>
 
-{{form.$invalid}}
           <div layout="row" layout-align="space-between">
             <input type="hidden" ng-model="dauConMum" name="{{tem.key}}" ng-required="tem.required && !tem.relationship">
             <!--If no relationship is set-->

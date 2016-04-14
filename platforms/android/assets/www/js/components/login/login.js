@@ -1,9 +1,20 @@
-myControllers.controller('loginCtrl', function ($scope, $http, storage, $state, $cordovaToast) {
+myControllers.controller('loginCtrl', function ($scope, $http, storage, $state, $cordovaToast, $ionicSlideBoxDelegate) {
   $scope.user = new Object();
+
+  $scope.firstTime = storage.notFirstTimeOpenApp? false : true;
+  if(!storage.notFirstTimeOpenApp) storage.notFirstTimeOpenApp = true;
+
+  console.log("fist time" + $scope.firstTime);
+    $ionicSlideBoxDelegate.enableSlide($scope.firstTime);
+
+  $scope.nextSlide = function() {
+    $ionicSlideBoxDelegate.next();
+  }
+
 
   $scope.login = function () {
     storage.$reset();
-    storage.serverUrl = 'http://Symplcms.com:9001';
+    storage.serverUrl = 'http://symplcms.com:80';
     $http.post(storage.serverUrl + '/user/login', $scope.user).then(function (resp) {
       var apps = [];
       resp.data.apps.forEach(function (app) {

@@ -1,0 +1,55 @@
+<ion-modal-view>
+  <div class="bar bar-header background-light-blue">
+    <h1 class="title">Choose Related Objects</h1>
+  </div>
+
+  <ion-content scrollbar-y="false" class="has-header ">
+    <!--<label class="item item-select">-->
+      <!--<span class="input-label">Select Template</span>-->
+      <!--<select ng-model="chosenTemplate" ng-init="chosenTemplate = templates[0]; changeTemplate(chosenTemplate)"-->
+              <!--ng-change="changeTemplate(chosenTemplate)"-->
+              <!--ng-options="template as template.name for template in templates">-->
+      <!--</select>-->
+    <!--</label>-->
+
+
+
+
+    <label class="item item-input col-70">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="text" placeholder="Search" ng-model="searchText.thing.name">
+    </label>
+
+    <!--<div class="spacer" style="width: 283px; height: 40px;"></div>-->
+
+    <div ng-click="toggleChosenRelationshipObject(object)"
+         ng-repeat="object in objects | orderBy:'thing.name' | filter:searchText" ng-click="chooseObject(object)">
+      <md-list-item ng-model="chosenApp" ng-click="chooseTemplate($index)">
+        <md-icon>apps</md-icon>
+        <p>{{object.thing.name}}</p>
+        <label class="checkbox" style="float:right">
+          <input type="checkbox" ng-checked="chosenRelationshipObjects.indexOf(object) > -1">
+        </label>
+      </md-list-item>
+      <md-divider md-inset></md-divider>
+    </div>
+
+    <!--<ion-item ng-click="toggleChosenRelationshipObject(object)"-->
+              <!--ng-repeat="object in objects | orderBy:'thing.name' | filter:searchText" ng-click="chooseObject(object)"-->
+              <!--class="item-thumbnail-left">-->
+      <!--<h2>{{object.thing.name}}</h2>-->
+
+      <!--<label class="checkbox" style="float:right">-->
+        <!--<input type="checkbox" ng-checked="chosenRelationshipObjects.indexOf(object) > -1">-->
+      <!--</label>-->
+    <!--</ion-item>-->
+
+    <span class="red">{{errorMessage2}}</span>
+
+
+  </ion-content>
+  <div class="row button-fixed-bottom">
+    <button ng-click="modal.hide()" class="button button-stable button-block col-50">Back</button>
+    <button ng-click="saveRelationship()" class="button button-positive button-block col-50">Add Relationship</button>
+  </div>
+</ion-modal-view>

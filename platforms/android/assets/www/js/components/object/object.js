@@ -1,4 +1,4 @@
-myControllers.controller('objectCtrl', function ($scope, storage, $mdBottomSheet, $ionicHistory, $state, $http, SweetAlert, UploadService, fileType, $ionicLoading, $cordovaToast, $ionicPlatform, $timeout) {
+myControllers.controller('objectCtrl', function ($scope, storage, $mdBottomSheet, $ionicHistory, $state,$mdDialog, $http, SweetAlert, UploadService, fileType, $ionicLoading, $cordovaToast, $ionicPlatform, $timeout) {
   //other functions
   $scope.fileType = fileType;
 
@@ -259,30 +259,48 @@ myControllers.controller('objectCtrl', function ($scope, storage, $mdBottomSheet
 
 //delete
   $scope.delete = function () {
-    SweetAlert.swal({
-        title: "Are you sure?",
-        text: "Your will not be able to recover this!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel plx!",
-        closeOnConfirm: false,
-        closeOnCancel: false
-      },
-      function (isConfirm) {
-        if (isConfirm) {
-          $http.delete(storage.serverUrl + '/object/delete/' + $scope.object.id)
-            .success(function (data) {
-              storage.objects.splice(storage.chosenObjectIndex, 1);
-              SweetAlert.swal("Deleted!", "Your object has been deleted.", "success");
-              $state.go('menu.viewByTemplate');
-            }).error(function (data) {
-            SweetAlert.swal("Cannot delete object", "Please try again", "error");
-          });
-        } else {
-          SweetAlert.swal("Cancelled", "Your object is safe ", "error");
-        }
+    //SweetAlert.swal({
+    //    title: "Are you sure?",
+    //    text: "Your will not be able to recover this!",
+    //    type: "warning",
+    //    showCancelButton: true,
+    //    confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, delete it!",
+    //    cancelButtonText: "No, cancel plx!",
+    //    closeOnConfirm: false,
+    //    closeOnCancel: false
+    //  },
+    //  function (isConfirm) {
+    //    if (isConfirm) {
+    //      $http.delete(storage.serverUrl + '/object/delete/' + $scope.object.id)
+    //        .success(function (data) {
+    //          storage.objects.splice(storage.chosenObjectIndex, 1);
+    //          SweetAlert.swal("Deleted!", "Your object has been deleted.", "success");
+    //          $state.go('menu.viewByTemplate');
+    //        }).error(function (data) {
+    //        SweetAlert.swal("Cannot delete object", "Please try again", "error");
+    //      });
+    //    } else {
+    //      SweetAlert.swal("Cancelled", "Your object is safe ", "error");
+    //    }
+    //  });
+
+
+    var confirm = $mdDialog.confirm()
+      .title('Are you sure?')
+      .textContent('Your will not be able to recover this!')
+      .ok('Yes')
+      .cancel('Cancel');
+    $mdDialog.show(confirm).then(function() {
+      $http.delete(storage.serverUrl + '/object/delete/' + $scope.object.id).then(function (res) {
+        storage.objects.splice(storage.chosenObjectIndex, 1);
+        $state.go('menu.viewByTemplate');
+      }, function (error) {
+        console.log(error.data);
+        $cordovaToast.showShortBottom("Failed to delete!");
       });
+    }, function() {
+      $cordovaToast.showShortBottom("Your Object is safe!");
+    });
   };
 
 //take picture and browse file

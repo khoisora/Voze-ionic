@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/D:/Dropbox/Voze-ionic/platforms/android/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="blue">#ff33b5e5</color>
+    <color name="graycolor">#aaaaaa</color>
+    <color name="green">#8FCC85</color>
+    <color name="main_background">#171717</color>
+    <color name="redcolor">#FF0000</color>
+    <color name="stat_font_color">#9c917a</color>
+    <color name="transparentgray">#60aaaaaa</color>
+    <!-- From: file:/D:/Dropbox/Voze-ionic/platforms/android/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="activity_name">@string/launcher_name</string>
+    <string name="app_name">todo</string>
+    <string name="category">Category</string>
+    <string name="currentDir">Current Dir</string>
+    <string name="drawer_close">Close</string>
+    <string name="drawer_open">Open</string>
+    <string name="external">External</string>
+    <string name="fileSize">File Size</string>
+    <string name="internal">Internal</string>
+    <string name="launcher_name">@string/app_name</string>
+    <!-- From: file:/D:/Dropbox/Voze-ionic/platforms/android/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+</resources>

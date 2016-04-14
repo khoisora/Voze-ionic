@@ -2,9 +2,9 @@ angular.module('analytic', []).controller('AnalyticController',
   [ '$q','$http', '$cookies','$window', function($http, $cookies, $window,$q) {
 
 
-  } ]).factory("SymplAPIService", function($q,$http){
+  } ]).factory("SymplAPIService", function($q,$http,storage){
   var users = ["Peter", "Daniel", "Nina"];
-  var DOMAIN = "http://symplcms.com/";
+  var DOMAIN = storage.serverUrl + "/mobile/";
 
   return {
     all: function() {
@@ -96,7 +96,6 @@ angular.module('analytic', []).controller('AnalyticController',
         d.resolve(data.data);
 
       },function(data){
-
         d.reject(data);
 
       });
