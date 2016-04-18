@@ -1,7 +1,7 @@
 <ion-view title="Choose App">
   <ion-content scrollbar-y="false" class="has-header">
     <md-card  md-whiteframe="3" ng-repeat="app in apps" class="no-side-margin">
-      <img src="{{'img/app-bg/' + ($index % 9) + '.jpg'}}" class="md-card-image" style="max-height: 150px;object-fit: cover;">
+      <img ng-src="{{'img/app-bg/' + ($index % 9) + '.jpg'}}" class="md-card-image" style="max-height: 150px;object-fit: cover;">
       <md-card-title style="padding-bottom:0px; padding-top:10px" >
         <md-card-title-text layout="row" layout-align="center center">
           <span class="md-headline">{{app.appName}}</span>

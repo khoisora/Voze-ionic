@@ -64,12 +64,12 @@
     <icon density="xhdpi" src="resources\android\icon\drawable-xhdpi-icon.png" />
     <icon density="xxhdpi" src="resources\android\icon\drawable-xxhdpi-icon.png" />
     <icon density="xxxhdpi" src="resources\android\icon\drawable-xxxhdpi-icon.png" />
-    <name>todo</name>
-    <description>
-        An Ionic Framework and Cordova project.
+    <name>SymplCMS</name>
+    <description>
+        An Ionic Framework and Cordova project.
     </description>
-    <author email="you@example.com" href="http://example.com.com/">
-      Your Name Here
+    <author email="you@example.com" href="http://example.com.com/">
+      Your Name Here
     </author>
     <content src="index.html" />
     <access origin="*" />

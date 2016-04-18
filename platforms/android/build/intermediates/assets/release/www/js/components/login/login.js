@@ -1,6 +1,6 @@
 myControllers.controller('loginCtrl', function ($scope, $http, storage, $state, $cordovaToast, $ionicSlideBoxDelegate) {
   $scope.user = new Object();
-
+  storage.notFirstTimeOpenApp = false;
   $scope.firstTime = storage.notFirstTimeOpenApp? false : true;
   if(!storage.notFirstTimeOpenApp) storage.notFirstTimeOpenApp = true;
 

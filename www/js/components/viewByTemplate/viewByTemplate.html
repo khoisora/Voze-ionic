@@ -41,12 +41,12 @@
       <md-grid-list md-cols="3" md-row-height="2:2" md-gutter="10px" >
 
         <md-grid-tile class="md-whiteframe-8dp"
-          ng-repeat="object in objects | filter:searchText" ng-click="chooseObject($index)"
+          ng-repeat="object in objects | filter:searchText" ng-click="chooseObject(object.indexx)"
                       md-rowspan="{{($index % 6 === 0 || $index % 6 === 4)? 2 : 1}}"
                       md-colspan="{{($index % 6 === 0 || $index % 6 === 4)? 2 : 1}}"
                       ng-init="object.backgroundUrl = object.thing.avatar.url.split(' ').join('%20')"
                       style="{{(object.thing.avatar)? 'background-image : url(' + '\'' +  object.thing.avatar.url.split(' ').join('%20') + '\'' + '); background-size:cover;' : 'background-color:' + colorArray[$index % 6] + ';'}};">
-
+{{object.indexx}}
           <!--<img ng-if="object.thing.avatar" style="object-fit:cover" ng-src="{{object.thing.avatar.url}}">-->
           <div style="width: 100%; height:{{($index % 6 === 0 || $index % 6 === 4)? '80%' : '60%'}}; position:absolute; top:0; left:0" layout="column" layout-align="center center" >
 

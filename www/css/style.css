@@ -6,7 +6,7 @@
   background-size: contain;
 }
 #login-image{
-  background:url('../img/login-bg.jpg') no-repeat center center fixed;
+  background:url('../img/login-bg.png') no-repeat center center fixed;
   background-size:cover;
   /*opacity:0.1;*/
 }
@@ -149,4 +149,8 @@
 .main-bg-color{
   background-color: #454E59;
   color:white;
+}
+
+.nvd3.nv-noData{
+  font-size:100px;
 }

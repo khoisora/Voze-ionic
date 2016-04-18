@@ -171,6 +171,15 @@ myControllers.controller('analyticsCtrl', function ($scope, SymplAPIService,stor
 
   }
 
+  function sortViewHits(data){
+    var filtered = _.sortBy(data,function(obj){
+      return obj.views + obj.hits;
+    });
+
+    return filtered;
+
+  }
+
   function convertTopObjsGraphData(objectsPerApp){
     var arr_values = [];
     var return_results = [];
@@ -426,8 +435,13 @@ myControllers.controller('analyticsCtrl', function ($scope, SymplAPIService,stor
     var arr_values_storage = [];
     var return_results = [];
 
-    var storage = objectsPerApp[1];
-    var object_count = objectsPerApp[0];
+    var storage;
+    var object_count;
+    if(objectsPerApp){
+      storage = objectsPerApp[1];
+      object_count = objectsPerApp[0];
+    }
+
     var return_objectCount = {};
     var return_Storage = {};
 
@@ -582,8 +596,21 @@ myControllers.controller('analyticsCtrl', function ($scope, SymplAPIService,stor
 
     });
     SymplAPIService.getViewHits(userId,id,false,from,to).then(function(data){
-      loadViewHits(data);
+      var sorted_data = sortViewHits(data);
+
+      var top10 = _.rest(sorted_data,data.length - 10);
+      var top10_desc = _.sortBy(top10,function(o){
+        return -1*(o.views + o.hits);
+      })
+      var sorted_desc_data_table = _.sortBy(sorted_data,function(o){
+        return -1*(o.views + o.hits);
+      })
+      loadViewHits(top10_desc);
+      self.data_tables = sorted_desc_data_table;
       self.data_viewHits = convertViewHitsGraphData(allViewHitsData);
+
+
+
     });
 
     SymplAPIService.getFileError(userId,id,false,from,to).then(function(data){
@@ -1006,12 +1033,11 @@ myControllers.controller('analyticsCtrl', function ($scope, SymplAPIService,stor
           bottom: 5,
           left: 0
         }
-      },
-      noData:"No Data"
+      }
     }
   };
 
-
+//console.log(angular.element("text .nv-noData"));
 
 
   /* View toggle	*/
